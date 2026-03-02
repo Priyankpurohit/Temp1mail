@@ -1,0 +1,45 @@
+// Temp1Mail — Prisma Schema
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Temporary Mailbox ─────────────────────────────────────
+
+model Mailbox {
+  id        String   @id @default(cuid())
+  address   String   @unique           // e.g. "abc123@temp1mail.com"
+  token     String   @unique @default(cuid()) // secret token for inbox access
+  expiresAt DateTime                    // auto-delete after this time
+  createdAt DateTime @default(now())
+
+  emails Email[]
+
+  @@index([expiresAt])                  // for cleanup queries
+  @@index([address])
+}
+
+// ─── Incoming Email ────────────────────────────────────────
+
+model Email {
+  id        String   @id @default(cuid())
+  mailboxId String
+  mailbox   Mailbox  @relation(fields: [mailboxId], references: [id], onDelete: Cascade)
+
+  fromAddr  String                      // sender address
+  fromName  String?                     // sender display name
+  subject   String   @default("(no subject)")
+  bodyHtml  String?  @db.Text           // HTML body
+  bodyText  String?  @db.Text           // plain-text fallback
+  isRead    Boolean  @default(false)
+  receivedAt DateTime @default(now())
+
+  @@index([mailboxId, receivedAt(sort: Desc)])
+}

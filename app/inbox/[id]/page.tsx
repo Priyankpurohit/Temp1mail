@@ -1,0 +1,225 @@
+"use client";
+
+import { useEffect, useState, useCallback } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowLeft, Copy, Check, Mail, RefreshCw, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { CountdownTimer } from "@/components/CountdownTimer";
+import { EmailCard, type EmailData } from "@/components/EmailCard";
+import { toast } from "@/hooks/use-toast";
+
+interface MailboxData {
+  id: string;
+  address: string;
+  expiresAt: string;
+  createdAt: string;
+  emails: {
+    id: string;
+    from: string;
+    subject: string;
+    isRead: boolean;
+    receivedAt: string;
+  }[];
+}
+
+export default function InboxPage() {
+  const { id: token } = useParams<{ id: string }>();
+  const router = useRouter();
+
+  const [mailbox, setMailbox] = useState<MailboxData | null>(null);
+  const [emails, setEmails] = useState<EmailData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  /** Fetch mailbox + email list from API */
+  const fetchMailbox = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/mailbox/${token}`);
+
+      if (res.status === 404) {
+        setError("Mailbox not found");
+        setLoading(false);
+        return;
+      }
+      if (res.status === 410) {
+        setError("This mailbox has expired");
+        setLoading(false);
+        return;
+      }
+      if (!res.ok) throw new Error("Failed to fetch mailbox");
+
+      const data: MailboxData = await res.json();
+      setMailbox(data);
+
+      // Map API emails to EmailData format for EmailCard component
+      setEmails(
+        data.emails.map((e) => ({
+          id: e.id,
+          from_email: e.from,
+          subject: e.subject,
+          body_text: "",
+          body_html: "",
+          received_at: e.receivedAt,
+        }))
+      );
+      setLoading(false);
+    } catch {
+      setError("Something went wrong");
+      setLoading(false);
+    }
+  }, [token]);
+
+  // Initial load
+  useEffect(() => {
+    fetchMailbox();
+  }, [fetchMailbox]);
+
+  // Auto-refresh every 5 seconds
+  useEffect(() => {
+    if (error) return;
+    const interval = setInterval(fetchMailbox, 5000);
+    return () => clearInterval(interval);
+  }, [fetchMailbox, error]);
+
+  const handleCopy = async () => {
+    if (!mailbox) return;
+    await navigator.clipboard.writeText(mailbox.address);
+    setCopied(true);
+    toast({ title: "Email copied!" });
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDelete = async () => {
+    if (!mailbox) return;
+    try {
+      await fetch(`/api/mailbox/${token}`, { method: "DELETE" });
+      toast({ title: "Mailbox deleted" });
+      router.push("/");
+    } catch {
+      toast({ title: "Error", description: "Could not delete mailbox" });
+    }
+  };
+
+  // Error state
+  if (error) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center bg-background p-6 text-center">
+        <Mail className="h-16 w-16 text-muted-foreground/30 mb-4" />
+        <h2 className="text-xl font-semibold text-foreground mb-2">{error}</h2>
+        <p className="text-sm text-muted-foreground mb-6">
+          This mailbox may have expired or doesn&apos;t exist.
+        </p>
+        <Link href="/">
+          <Button className="bg-gradient-to-r from-primary to-primary-glow text-primary-foreground">
+            Generate New Email
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative min-h-screen bg-background">
+      {/* Background */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-1/4 -top-1/4 h-[400px] w-[400px] rounded-full bg-primary/8 blur-[100px]" />
+      </div>
+
+      {/* Header */}
+      <header className="relative z-10 flex items-center justify-between border-b border-border px-4 py-3 md:px-6">
+        <div className="flex items-center gap-3">
+          <Link href="/">
+            <Button variant="ghost" size="icon" className="rounded-full">
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+          </Link>
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <Mail className="h-5 w-5 text-primary" />
+            <span className="text-sm font-bold text-foreground">temp1mail</span>
+          </Link>
+        </div>
+        <ThemeToggle />
+      </header>
+
+      <div className="relative z-10 mx-auto flex max-w-5xl gap-6 px-4 py-6 md:px-6">
+        {/* Main content */}
+        <div className="flex-1 min-w-0 space-y-6">
+          {/* Email address bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="glass-card rounded-xl p-4"
+          >
+            <div className="flex items-center gap-2">
+              <div className="flex-1 min-w-0">
+                <p className="text-xs text-muted-foreground mb-1">Your temporary email</p>
+                <p className="truncate font-mono text-sm font-semibold text-foreground">
+                  {mailbox?.address || "Loading..."}
+                </p>
+              </div>
+              <Button variant="ghost" size="icon" onClick={handleDelete} className="shrink-0" title="Delete mailbox">
+                <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive transition-colors" />
+              </Button>
+              <Button variant="ghost" size="icon" onClick={handleCopy} className="shrink-0">
+                {copied ? <Check className="h-4 w-4 text-accent-foreground" /> : <Copy className="h-4 w-4 text-muted-foreground" />}
+              </Button>
+            </div>
+            {mailbox && (
+              <CountdownTimer expiresAt={new Date(mailbox.expiresAt)} className="mt-3" />
+            )}
+          </motion.div>
+
+          {/* Refresh indicator */}
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <RefreshCw className="h-3 w-3 animate-spin" />
+            Auto-refreshing every 5s
+          </div>
+
+          {/* Email list */}
+          {loading ? (
+            <div className="space-y-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="glass-card rounded-xl p-4 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Skeleton className="h-9 w-9 rounded-full" />
+                    <div className="flex-1 space-y-2">
+                      <Skeleton className="h-4 w-1/3" />
+                      <Skeleton className="h-3 w-2/3" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : emails.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex flex-col items-center py-20 text-center"
+            >
+              <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3 }}>
+                <Mail className="h-16 w-16 text-muted-foreground/30" />
+              </motion.div>
+              <h3 className="mt-4 text-lg font-semibold text-foreground">Waiting for emails...</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Send an email to <span className="font-mono text-primary">{mailbox?.address}</span> and it will appear here
+              </p>
+            </motion.div>
+          ) : (
+            <div className="space-y-3">
+              {emails.map((em) => (
+                <EmailCard key={em.id} email={em} />
+              ))}
+            </div>
+          )}
+
+        </div>
+
+      </div>
+    </div>
+  );
+}
