@@ -2,16 +2,15 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 /**
- * POST /api/cleanup
+ * GET /api/cleanup
  *
- * Delete all expired mailboxes (and their emails via cascade).
- * Call this from a cron job (e.g., Vercel Cron, or external service).
+ * Delete all expired mailboxes (and their emails via Prisma cascade).
+ * Called automatically by Vercel Cron every 5 minutes.
  *
- * Protect with a secret in production:
- *   Authorization: Bearer <CRON_SECRET>
+ * Protected by CRON_SECRET — Vercel sends this automatically.
  */
-export async function POST(req: Request) {
-    // Simple auth check for cron
+export async function GET(req: Request) {
+    // Verify the request is from Vercel Cron
     const authHeader = req.headers.get("authorization");
     const cronSecret = process.env.CRON_SECRET;
 
@@ -20,6 +19,7 @@ export async function POST(req: Request) {
     }
 
     try {
+        // Delete all expired mailboxes — emails are cascade-deleted automatically
         const result = await prisma.mailbox.deleteMany({
             where: {
                 expiresAt: { lt: new Date() },
