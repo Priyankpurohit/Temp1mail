@@ -120,17 +120,19 @@ export function EmailCard({ email, token }: EmailCardProps) {
                   <span className="ml-2 text-sm text-muted-foreground">Loading email...</span>
                 </div>
               ) : bodyHtml ? (
-                <div
-                  className="prose prose-sm dark:prose-invert max-w-none text-foreground"
-                  dangerouslySetInnerHTML={{
-                    __html: highlightOtpInHtml(bodyHtml),
-                  }}
-                  onClick={(e) => {
-                    const target = e.target as HTMLElement;
-                    const otp = target.getAttribute("data-otp");
-                    if (otp) handleOtpCopy(otp);
-                  }}
-                />
+                <div className="email-body-wrapper">
+                  <div
+                    className="prose prose-sm max-w-none"
+                    dangerouslySetInnerHTML={{
+                      __html: highlightOtpInHtml(bodyHtml),
+                    }}
+                    onClick={(e) => {
+                      const target = e.target as HTMLElement;
+                      const otp = target.getAttribute("data-otp");
+                      if (otp) handleOtpCopy(otp);
+                    }}
+                  />
+                </div>
               ) : bodyText ? (
                 <pre className="whitespace-pre-wrap text-sm text-foreground/80">
                   {bodyText}

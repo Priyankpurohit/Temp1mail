@@ -150,3 +150,45 @@ body {
   border-color: #f59e0b;
   box-shadow: 0 0 14px rgba(251, 191, 36, 0.4), 0 0 4px rgba(217, 119, 6, 0.6);
 }
+
+/* ── Email body container ── */
+.email-body-wrapper {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.email-body-wrapper .prose {
+  padding: 1rem;
+  background: #ffffff !important;
+  border-radius: 0.75rem;
+}
+
+/* Force all text to be dark and readable, overriding email inline styles */
+.email-body-wrapper .prose,
+.email-body-wrapper .prose *:not(.otp-highlight) {
+  color: #1a1a1a !important;
+  background-color: transparent !important;
+}
+
+.email-body-wrapper .prose a {
+  color: #7c3aed !important;
+  text-decoration: underline;
+}
+
+.email-body-wrapper .prose h1,
+.email-body-wrapper .prose h2,
+.email-body-wrapper .prose h3 {
+  color: #0a0a0a !important;
+}
+
+.email-body-wrapper .prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Keep OTP badges styled properly inside email body */
+.email-body-wrapper .otp-highlight {
+  color: #fbbf24 !important;
+  background: rgba(217, 119, 6, 0.1) !important;
+}
