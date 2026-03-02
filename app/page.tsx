@@ -28,11 +28,15 @@ const Index = () => {
     setIsGenerating(true);
     try {
       const res = await fetch("/api/mailbox", { method: "POST" });
-      if (!res.ok) throw new Error("Failed to create mailbox");
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.detail || errData.error || "Failed to create mailbox");
+      }
       const data: MailboxResponse = await res.json();
       setMailbox(data);
-    } catch {
-      toast({ title: "Error", description: "Could not create mailbox. Please try again." });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Unknown error";
+      toast({ title: "Error", description: msg });
     } finally {
       setIsGenerating(false);
     }

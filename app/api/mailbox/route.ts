@@ -34,8 +34,9 @@ export async function POST() {
         );
     } catch (error) {
         console.error("Failed to create mailbox:", error);
+        const message = error instanceof Error ? error.message : String(error);
         return NextResponse.json(
-            { error: "Failed to create mailbox" },
+            { error: "Failed to create mailbox", detail: message },
             { status: 500 }
         );
     }
