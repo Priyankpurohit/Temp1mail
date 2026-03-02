@@ -118,7 +118,7 @@ const Index = () => {
                 )}
               </Button>
               <p className="text-center text-xs text-muted-foreground">
-                Click to get a random disposable email — no signup needed
+                Click to get a random disposable email - no signup needed
               </p>
             </div>
           ) : (

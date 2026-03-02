@@ -1,6 +1,8 @@
+"use client";
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Copy, Check, User } from "lucide-react";
+import { ChevronDown, Copy, Check, User, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { extractOtpCodes, highlightOtpInHtml } from "@/lib/otp";
 import { toast } from "@/hooks/use-toast";
@@ -16,12 +18,45 @@ export interface EmailData {
 
 interface EmailCardProps {
   email: EmailData;
+  token: string;
 }
 
-export function EmailCard({ email }: EmailCardProps) {
+export function EmailCard({ email, token }: EmailCardProps) {
   const [expanded, setExpanded] = useState(false);
-  const otpCodes = extractOtpCodes(email.body_text || "");
+  const [fullEmail, setFullEmail] = useState<{
+    bodyHtml: string | null;
+    bodyText: string | null;
+  } | null>(null);
+  const [loadingBody, setLoadingBody] = useState(false);
+
+  const bodyText = fullEmail?.bodyText || email.body_text || "";
+  const bodyHtml = fullEmail?.bodyHtml || email.body_html || "";
+  const otpCodes = extractOtpCodes(bodyText);
   const timeAgo = getTimeAgo(email.received_at);
+
+  const handleToggle = async () => {
+    const willExpand = !expanded;
+    setExpanded(willExpand);
+
+    // Fetch full email body on first expand
+    if (willExpand && !fullEmail && !loadingBody) {
+      setLoadingBody(true);
+      try {
+        const res = await fetch(`/api/mailbox/${token}/emails/${email.id}`);
+        if (res.ok) {
+          const data = await res.json();
+          setFullEmail({
+            bodyHtml: data.bodyHtml || null,
+            bodyText: data.bodyText || null,
+          });
+        }
+      } catch {
+        toast({ title: "Error", description: "Could not load email content" });
+      } finally {
+        setLoadingBody(false);
+      }
+    }
+  };
 
   const handleOtpCopy = async (code: string) => {
     await navigator.clipboard.writeText(code);
@@ -38,7 +73,7 @@ export function EmailCard({ email }: EmailCardProps) {
     >
       {/* Header */}
       <button
-        onClick={() => setExpanded(!expanded)}
+        onClick={handleToggle}
         className="flex w-full items-start gap-3 p-4 text-left hover:bg-accent/30 transition-colors"
       >
         <div className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10">
@@ -79,11 +114,16 @@ export function EmailCard({ email }: EmailCardProps) {
             className="overflow-hidden"
           >
             <div className="border-t border-border p-4">
-              {email.body_html ? (
+              {loadingBody ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+                  <span className="ml-2 text-sm text-muted-foreground">Loading email...</span>
+                </div>
+              ) : bodyHtml ? (
                 <div
                   className="prose prose-sm dark:prose-invert max-w-none text-foreground"
                   dangerouslySetInnerHTML={{
-                    __html: highlightOtpInHtml(email.body_html),
+                    __html: highlightOtpInHtml(bodyHtml),
                   }}
                   onClick={(e) => {
                     const target = e.target as HTMLElement;
@@ -91,10 +131,12 @@ export function EmailCard({ email }: EmailCardProps) {
                     if (otp) handleOtpCopy(otp);
                   }}
                 />
-              ) : (
+              ) : bodyText ? (
                 <pre className="whitespace-pre-wrap text-sm text-foreground/80">
-                  {email.body_text || "No content"}
+                  {bodyText}
                 </pre>
+              ) : (
+                <p className="text-sm text-muted-foreground italic">No content</p>
               )}
             </div>
           </motion.div>

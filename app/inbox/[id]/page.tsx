@@ -212,7 +212,7 @@ export default function InboxPage() {
           ) : (
             <div className="space-y-3">
               {emails.map((em) => (
-                <EmailCard key={em.id} email={em} />
+                <EmailCard key={em.id} email={em} token={token} />
               ))}
             </div>
           )}
