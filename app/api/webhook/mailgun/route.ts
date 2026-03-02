@@ -28,12 +28,17 @@ export async function POST(req: NextRequest) {
         const token = formData.get("token") as string;
         const signature = formData.get("signature") as string;
 
-        if (!verifyMailgunSignature(timestamp, token, signature)) {
-            console.warn("Invalid Mailgun signature");
-            return NextResponse.json(
-                { error: "Invalid signature" },
-                { status: 403 }
-            );
+        // Skip verification if API key is not configured (for initial testing)
+        if (MAILGUN_API_KEY) {
+            if (!verifyMailgunSignature(timestamp, token, signature)) {
+                console.warn("Invalid Mailgun signature");
+                return NextResponse.json(
+                    { error: "Invalid signature" },
+                    { status: 403 }
+                );
+            }
+        } else {
+            console.warn("MAILGUN_API_KEY not set — skipping signature verification");
         }
 
         // ─── Parse email fields ──────────────────────────────
