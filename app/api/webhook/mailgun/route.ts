@@ -88,6 +88,13 @@ export async function POST(req: NextRequest) {
             },
         });
 
+        // ─── Track email received (fire-and-forget) ──────────
+        prisma.stats.upsert({
+            where: { id: "global" },
+            create: { id: "global", mailboxes: 0, emails: 1 },
+            update: { emails: { increment: 1 } },
+        }).catch((err: unknown) => console.error("Stats tracking error:", err));
+
         return NextResponse.json({ message: "Stored" }, { status: 200 });
     } catch (error) {
         console.error("Webhook error:", error);

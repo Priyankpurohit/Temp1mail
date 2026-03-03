@@ -2,7 +2,8 @@
 // Docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider      = "prisma-client-js"
+  provider      = "prisma-client"
+  output        = "../node_modules/.prisma/client"
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
@@ -42,4 +43,13 @@ model Email {
   receivedAt DateTime @default(now())
 
   @@index([mailboxId, receivedAt(sort: Desc)])
+}
+
+// ─── Global Stats ──────────────────────────────────────────
+
+model Stats {
+  id        String   @id @default("global")
+  mailboxes Int      @default(0)
+  emails    Int      @default(0)
+  updatedAt DateTime @updatedAt
 }
