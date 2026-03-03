@@ -2,6 +2,11 @@
 
 # dependencies
 /node_modules
+
+# environment variables
+.env
+.env.local
+.env*.local
 /.pnp
 .pnp.*
 .yarn/*
