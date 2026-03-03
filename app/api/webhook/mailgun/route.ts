@@ -56,15 +56,31 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // ─── Find the mailbox ────────────────────────────────
-        const mailbox = await prisma.mailbox.findUnique({
+        // ─── Find or auto-create the mailbox ─────────────────
+        const MAIL_DOMAIN = "temp1mail.com";
+        let mailbox = await prisma.mailbox.findUnique({
             where: { address: recipient },
         });
 
         if (!mailbox) {
-            // No matching mailbox — discard silently (Mailgun expects 200)
-            console.log(`No mailbox found for ${recipient}, discarding.`);
-            return NextResponse.json({ message: "Discarded" }, { status: 200 });
+            // Auto-create mailbox if recipient is a valid @temp1mail.com address
+            if (!recipient.endsWith(`@${MAIL_DOMAIN}`)) {
+                console.log(`Recipient ${recipient} is not @${MAIL_DOMAIN}, discarding.`);
+                return NextResponse.json({ message: "Discarded" }, { status: 200 });
+            }
+
+            // Create the mailbox on-the-fly so emails aren't lost
+            const token = crypto.randomBytes(32).toString("hex");
+            const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+            mailbox = await prisma.mailbox.create({
+                data: {
+                    address: recipient,
+                    token,
+                    expiresAt,
+                },
+            });
+            console.log(`Auto-created mailbox for ${recipient}`);
         }
 
         if (new Date() > mailbox.expiresAt) {

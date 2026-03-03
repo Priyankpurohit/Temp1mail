@@ -98,11 +98,14 @@ export async function POST(req: NextRequest) {
 
         const expiresAt = getExpirationDate(MAILBOX_LIFETIME_MINUTES);
 
-        const mailbox = await prisma.mailbox.create({
-            data: {
+        // Use upsert: if webhook already auto-created this mailbox, return existing one
+        const mailbox = await prisma.mailbox.upsert({
+            where: { address },
+            create: {
                 address,
                 expiresAt,
             },
+            update: {}, // Keep existing data if already created
         });
 
         return NextResponse.json(

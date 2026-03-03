@@ -18,14 +18,16 @@ export function CountdownTimer({
     Math.max(0, expiresAt.getTime() - Date.now())
   );
 
+  const expiresAtMs = expiresAt.getTime();
+
   useEffect(() => {
     const interval = setInterval(() => {
-      const r = Math.max(0, expiresAt.getTime() - Date.now());
+      const r = Math.max(0, expiresAtMs - Date.now());
       setRemaining(r);
       if (r <= 0) clearInterval(interval);
     }, 1000);
     return () => clearInterval(interval);
-  }, [expiresAt]);
+  }, [expiresAtMs]);
 
   const totalMs = lifetimeMinutes * 60 * 1000;
   const pct = Math.min(100, (remaining / totalMs) * 100);
