@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "temp1mail — Free Disposable Email",
+  title: "Temp1Mail - Disposable Temporary Email",
   description: "Get a disposable email address instantly. No signup, no hassle.",
 };
 
@@ -27,6 +27,7 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
         <Providers>{children}</Providers>
       </body>

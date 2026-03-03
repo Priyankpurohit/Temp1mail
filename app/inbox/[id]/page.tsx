@@ -21,6 +21,8 @@ interface MailboxData {
     id: string;
     from: string;
     subject: string;
+    body_html: string | null;
+    body_text: string | null;
     isRead: boolean;
     receivedAt: string;
   }[];
@@ -62,8 +64,8 @@ export default function InboxPage() {
           id: e.id,
           from_email: e.from,
           subject: e.subject,
-          body_text: "",
-          body_html: "",
+          body_text: e.body_text || "",
+          body_html: e.body_html || "",
           received_at: e.receivedAt,
         }))
       );
@@ -79,10 +81,10 @@ export default function InboxPage() {
     fetchMailbox();
   }, [fetchMailbox]);
 
-  // Auto-refresh every 5 seconds
+  // Auto-refresh every 1 second
   useEffect(() => {
     if (error) return;
-    const interval = setInterval(fetchMailbox, 5000);
+    const interval = setInterval(fetchMailbox, 1000);
     return () => clearInterval(interval);
   }, [fetchMailbox, error]);
 
@@ -177,7 +179,7 @@ export default function InboxPage() {
           {/* Refresh indicator */}
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <RefreshCw className="h-3 w-3 animate-spin" />
-            Auto-refreshing every 5s
+            Auto-refreshing
           </div>
 
           {/* Email list */}
@@ -206,7 +208,14 @@ export default function InboxPage() {
               </motion.div>
               <h3 className="mt-4 text-lg font-semibold text-foreground">Waiting for emails...</h3>
               <p className="mt-1 text-sm text-muted-foreground">
-                Send an email to <span className="font-mono text-primary">{mailbox?.address}</span> and it will appear here
+                Send an email to{" "}
+                <a
+                  href={`mailto:${mailbox?.address}`}
+                  className="font-mono text-primary no-underline hover:no-underline hover:opacity-80 transition-opacity"
+                >
+                  {mailbox?.address}
+                </a>{" "}
+                and it will appear here
               </p>
             </motion.div>
           ) : (

@@ -39,9 +39,9 @@
   --card-foreground: #fafafa;
   --popover: #111128;
   --popover-foreground: #fafafa;
-  --primary: #8b5cf6;
+  --primary: #7c3aed;
   --primary-foreground: #ffffff;
-  --primary-glow: #a78bfa;
+  --primary-glow: #a855f7;
   --secondary: #1e1e3a;
   --secondary-foreground: #fafafa;
   --muted: #1e1e3a;
@@ -91,6 +91,18 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+button,
+[role="button"],
+a,
+summary,
+select,
+input[type="checkbox"],
+input[type="radio"],
+input[type="submit"],
+input[type="button"] {
+  cursor: pointer;
 }
 
 /* ── Glass card effect ── */
@@ -160,26 +172,25 @@ body {
 
 .email-body-wrapper .prose {
   padding: 1rem;
-  background: #ffffff !important;
   border-radius: 0.75rem;
 }
 
-/* Force all text to be dark and readable, overriding email inline styles */
+/* Override email inline styles to match current theme */
 .email-body-wrapper .prose,
 .email-body-wrapper .prose *:not(.otp-highlight) {
-  color: #1a1a1a !important;
+  color: var(--foreground) !important;
   background-color: transparent !important;
 }
 
 .email-body-wrapper .prose a {
-  color: #7c3aed !important;
+  color: var(--primary) !important;
   text-decoration: underline;
 }
 
 .email-body-wrapper .prose h1,
 .email-body-wrapper .prose h2,
 .email-body-wrapper .prose h3 {
-  color: #0a0a0a !important;
+  color: var(--foreground) !important;
 }
 
 .email-body-wrapper .prose img {

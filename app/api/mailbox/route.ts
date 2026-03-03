@@ -74,8 +74,28 @@ export async function POST(req: NextRequest) {
         cleanupExpired();
         trackMailboxCreated();
 
-        // ─── Create mailbox ────────────────────────────────
-        const address = generateEmailAddress(MAIL_DOMAIN);
+        // ─── Parse optional address from client ─────────────
+        let address: string;
+        try {
+            const body = await req.json();
+            if (body.address && typeof body.address === "string") {
+                // Validate: must match pattern like "abc123@temp1mail.com"
+                const pattern = /^[a-z0-9]{6,12}@[a-z0-9.-]+$/;
+                if (!pattern.test(body.address)) {
+                    return NextResponse.json(
+                        { error: "Invalid email address format" },
+                        { status: 400 }
+                    );
+                }
+                address = body.address.toLowerCase();
+            } else {
+                address = generateEmailAddress(MAIL_DOMAIN);
+            }
+        } catch {
+            // No JSON body — generate server-side
+            address = generateEmailAddress(MAIL_DOMAIN);
+        }
+
         const expiresAt = getExpirationDate(MAILBOX_LIFETIME_MINUTES);
 
         const mailbox = await prisma.mailbox.create({

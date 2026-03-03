@@ -23,6 +23,8 @@ export async function GET(_req: NextRequest, { params }: RouteParams) {
                         fromAddr: true,
                         fromName: true,
                         subject: true,
+                        bodyHtml: true,
+                        bodyText: true,
                         isRead: true,
                         receivedAt: true,
                     },
@@ -50,10 +52,12 @@ export async function GET(_req: NextRequest, { params }: RouteParams) {
             address: mailbox.address,
             expiresAt: mailbox.expiresAt.toISOString(),
             createdAt: mailbox.createdAt.toISOString(),
-            emails: mailbox.emails.map((e: { id: string; fromAddr: string; fromName: string | null; subject: string; isRead: boolean; receivedAt: Date }) => ({
+            emails: mailbox.emails.map((e: { id: string; fromAddr: string; fromName: string | null; subject: string; bodyHtml: string | null; bodyText: string | null; isRead: boolean; receivedAt: Date }) => ({
                 id: e.id,
                 from: e.fromName ? `${e.fromName} <${e.fromAddr}>` : e.fromAddr,
                 subject: e.subject,
+                body_html: e.bodyHtml,
+                body_text: e.bodyText,
                 isRead: e.isRead,
                 receivedAt: e.receivedAt.toISOString(),
             })),

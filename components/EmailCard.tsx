@@ -38,8 +38,9 @@ export function EmailCard({ email, token }: EmailCardProps) {
     const willExpand = !expanded;
     setExpanded(willExpand);
 
-    // Fetch full email body on first expand
-    if (willExpand && !fullEmail && !loadingBody) {
+    // Only fetch from API if body content isn't already available
+    const hasBody = email.body_html || email.body_text;
+    if (willExpand && !fullEmail && !hasBody && !loadingBody) {
       setLoadingBody(true);
       try {
         const res = await fetch(`/api/mailbox/${token}/emails/${email.id}`);

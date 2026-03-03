@@ -9,6 +9,17 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 import { toast } from "@/hooks/use-toast";
 
+const MAIL_DOMAIN = "temp1mail.com";
+const CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+function randomUsername(): string {
+  let name = "";
+  for (let i = 0; i < 8; i++) {
+    name += CHARS[Math.floor(Math.random() * CHARS.length)];
+  }
+  return name;
+}
+
 interface MailboxResponse {
   id: string;
   address: string;
@@ -19,40 +30,55 @@ interface MailboxResponse {
 
 const Index = () => {
   const router = useRouter();
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [mailbox, setMailbox] = useState<MailboxResponse | null>(null);
+  const [username, setUsername] = useState("");
+  const [isOpening, setIsOpening] = useState(false);
   const [copied, setCopied] = useState(false);
+  // "custom" = type your own email, "random" = generated email shown
+  const [mode, setMode] = useState<"custom" | "random">("custom");
 
-  /** Call the API to create a real mailbox in the DB */
-  const createMailbox = async () => {
-    setIsGenerating(true);
+  /** Generate a random username and switch to random view */
+  const generateRandom = () => {
+    setUsername(randomUsername());
+    setMode("random");
+  };
+
+  /** Switch back to custom input view */
+  const switchToCustom = () => {
+    setUsername("");
+    setMode("custom");
+  };
+
+  /** Create the mailbox in DB and navigate to inbox */
+  const handleOpenInbox = async () => {
+    if (!username.trim()) return;
+    const fullAddress = `${username}@${MAIL_DOMAIN}`;
+    setIsOpening(true);
     try {
-      const res = await fetch("/api/mailbox", { method: "POST" });
+      const res = await fetch("/api/mailbox", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address: fullAddress }),
+      });
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
         throw new Error(errData.detail || errData.error || "Failed to create mailbox");
       }
       const data: MailboxResponse = await res.json();
-      setMailbox(data);
+      router.push(`/inbox/${data.token}`);
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Unknown error";
       toast({ title: "Error", description: msg });
     } finally {
-      setIsGenerating(false);
+      setIsOpening(false);
     }
   };
 
   const handleCopy = async () => {
-    if (!mailbox) return;
-    await navigator.clipboard.writeText(mailbox.address);
+    const fullAddress = `${username}@${MAIL_DOMAIN}`;
+    await navigator.clipboard.writeText(fullAddress);
     setCopied(true);
     toast({ title: "Email copied!", description: "Your temporary address is ready to use." });
     setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleGoToInbox = () => {
-    if (!mailbox) return;
-    router.push(`/inbox/${mailbox.token}`);
   };
 
   return (
@@ -66,8 +92,8 @@ const Index = () => {
       {/* Header */}
       <header className="relative z-10 flex items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <Mail className="h-6 w-6 text-primary" />
-          <span className="text-lg font-bold text-foreground">temp1mail</span>
+          <Mail className="h-8 w-8 text-primary" />
+          <span className="text-xl font-bold text-foreground">Temp1Mail</span>
         </Link>
         <ThemeToggle />
       </header>
@@ -92,22 +118,40 @@ const Index = () => {
           </p>
         </motion.div>
 
-        {/* Generate card */}
+        {/* Card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.5 }}
           className="glass-card w-full max-w-md rounded-2xl p-8"
         >
-          {!mailbox ? (
+          {mode === "custom" ? (
+            /* ── Custom email input view ── */
             <div className="space-y-4">
+              <div className="flex items-center rounded-xl border border-border bg-card overflow-hidden">
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, ""))}
+                  placeholder="Type the email"
+                  className="flex-1 bg-transparent px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none"
+                  maxLength={12}
+                />
+                <span className="shrink-0 pr-4 text-sm text-muted-foreground font-medium">
+                  @{MAIL_DOMAIN}
+                </span>
+              </div>
+
               <Button
-                onClick={createMailbox}
-                disabled={isGenerating}
+                onClick={() => {
+                  if (!username.trim()) toast({ title: "Please enter an email address" });
+                  else handleOpenInbox();
+                }}
+                disabled={isOpening}
                 className="w-full bg-gradient-to-r from-primary to-primary-glow text-primary-foreground text-lg py-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow"
                 size="lg"
               >
-                {isGenerating ? (
+                {isOpening ? (
                   <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
@@ -117,57 +161,72 @@ const Index = () => {
                 ) : (
                   <>
                     <Zap className="mr-2 h-5 w-5" />
-                    Generate Email Address
+                    Create Inbox
                   </>
                 )}
               </Button>
-              <p className="text-center text-xs text-muted-foreground">
-                Click to get a random disposable email - no signup needed
-              </p>
+
+              <button
+                onClick={generateRandom}
+                className="w-full rounded-xl border border-border bg-card/50 py-3 text-sm font-medium text-foreground hover:bg-accent/30 transition-colors"
+              >
+                Generate Random Email
+              </button>
             </div>
           ) : (
+            /* ── Generated email view ── */
             <div className="space-y-4">
               <div className="flex items-center gap-2 rounded-xl border border-border bg-card p-4">
                 <Mail className="h-5 w-5 shrink-0 text-primary" />
                 <span className="flex-1 truncate font-mono text-sm font-medium text-foreground">
-                  {mailbox.address}
+                  {username}@{MAIL_DOMAIN}
                 </span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={createMailbox}
-                  disabled={isGenerating}
-                  className="shrink-0"
+                <button
+                  onClick={generateRandom}
+                  className="shrink-0 p-1.5 rounded-md hover:bg-accent/30 transition-colors"
                   title="Generate new random email"
                 >
-                  <RefreshCw className={`h-4 w-4 text-muted-foreground ${isGenerating ? "animate-spin" : ""}`} />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
+                  <RefreshCw className="h-4 w-4 text-muted-foreground" />
+                </button>
+                <button
                   onClick={handleCopy}
-                  className="shrink-0"
+                  className="shrink-0 p-1.5 rounded-md hover:bg-accent/30 transition-colors"
+                  title="Copy email address"
                 >
                   {copied ? (
                     <Check className="h-4 w-4 text-accent-foreground" />
                   ) : (
                     <Copy className="h-4 w-4 text-muted-foreground" />
                   )}
-                </Button>
+                </button>
               </div>
+
               <Button
-                onClick={handleGoToInbox}
-                className="w-full bg-gradient-to-r from-primary to-primary-glow text-primary-foreground rounded-xl font-semibold"
+                onClick={handleOpenInbox}
+                disabled={isOpening}
+                className="w-full bg-gradient-to-r from-primary to-primary-glow text-primary-foreground text-lg py-6 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow"
                 size="lg"
               >
-                Open Inbox
+                {isOpening ? (
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                  >
+                    <Zap className="h-5 w-5" />
+                  </motion.div>
+                ) : (
+                  <>
+                    <Zap className="mr-2 h-5 w-5" />
+                    Open Inbox
+                  </>
+                )}
               </Button>
+
               <button
-                onClick={createMailbox}
-                disabled={isGenerating}
-                className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50"
+                onClick={switchToCustom}
+                className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                Generate a different address
+                Generate Email of your choice
               </button>
             </div>
           )}
