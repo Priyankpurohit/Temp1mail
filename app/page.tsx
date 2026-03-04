@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 import { toast } from "@/hooks/use-toast";
+import { Footer } from "@/components/Footer";
 
 const MAIL_DOMAIN = "temp1mail.com";
 const CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -255,10 +256,7 @@ const Index = () => {
 
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-border py-6 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} temp1mail.com — Free disposable email service
-      </footer>
+      <Footer />
     </div>
   );
 };
