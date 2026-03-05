@@ -2,12 +2,49 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Mail, ArrowLeft, Send } from "lucide-react";
+import { Mail, ArrowLeft, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Footer } from "@/components/Footer";
+import { toast } from "@/hooks/use-toast";
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
+    const [sending, setSending] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (sending) return;
+
+        setSending(true);
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, message }),
+            });
+
+            if (res.ok) {
+                setSubmitted(true);
+            } else {
+                const data = await res.json();
+                toast({
+                    title: "Failed to send",
+                    description: data.error || "Something went wrong. Please try again.",
+                });
+            }
+        } catch {
+            toast({
+                title: "Network error",
+                description: "Could not send message. Please check your connection.",
+            });
+        } finally {
+            setSending(false);
+        }
+    };
 
     return (
         <div className="relative min-h-screen overflow-hidden bg-background">
@@ -19,24 +56,22 @@ export default function ContactPage() {
 
             {/* Header */}
             <header className="relative z-10 flex items-center justify-between px-6 py-4">
-                <Link
-                    href="/"
-                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-                >
-                    <Mail className="h-8 w-8 text-primary" />
-                    <span className="text-xl font-bold text-foreground">Temp1Mail</span>
-                </Link>
-                <Link
-                    href="/"
-                    className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                    <ArrowLeft className="h-4 w-4" />
-                    Back
-                </Link>
+                <div className="flex items-center gap-3">
+                    <Link href="/">
+                        <Button variant="ghost" size="icon" className="rounded-full">
+                            <ArrowLeft className="h-5 w-5" />
+                        </Button>
+                    </Link>
+                    <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                        <Mail className="h-8 w-8 text-primary" />
+                        <span className="text-xl font-bold text-foreground">Temp1Mail</span>
+                    </Link>
+                </div>
+                <ThemeToggle />
             </header>
 
             {/* Content */}
-            <main className="relative z-10 mx-auto max-w-xl px-6 pt-8 pb-20">
+            <main className="relative z-10 mx-auto max-w-xl px-6 pt-8 pb-24">
                 <h1 className="mb-2 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
                     Contact Us
                 </h1>
@@ -56,10 +91,7 @@ export default function ContactPage() {
                     </div>
                 ) : (
                     <form
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            setSubmitted(true);
-                        }}
+                        onSubmit={handleSubmit}
                         className="glass-card rounded-xl p-8 space-y-5"
                     >
                         <div>
@@ -73,6 +105,8 @@ export default function ContactPage() {
                                 id="name"
                                 type="text"
                                 required
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                                 placeholder="Your name"
                                 className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-primary/40 transition"
                             />
@@ -89,6 +123,8 @@ export default function ContactPage() {
                                 id="email"
                                 type="email"
                                 required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 placeholder="you@example.com"
                                 className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-primary/40 transition"
                             />
@@ -105,6 +141,8 @@ export default function ContactPage() {
                                 id="message"
                                 required
                                 rows={5}
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
                                 placeholder="How can we help?"
                                 className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-primary/40 transition resize-none"
                             />
@@ -112,11 +150,21 @@ export default function ContactPage() {
 
                         <Button
                             type="submit"
-                            className="w-full bg-gradient-to-r from-primary to-primary-glow text-primary-foreground text-base py-5 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow"
+                            disabled={sending}
+                            className="w-full bg-gradient-to-r from-primary to-primary-glow text-primary-foreground text-base py-5 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50"
                             size="lg"
                         >
-                            <Send className="mr-2 h-4 w-4" />
-                            Send Message
+                            {sending ? (
+                                <>
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                    Sending...
+                                </>
+                            ) : (
+                                <>
+                                    <Send className="mr-2 h-4 w-4" />
+                                    Send Message
+                                </>
+                            )}
                         </Button>
                     </form>
                 )}

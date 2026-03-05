@@ -121,13 +121,13 @@ const Index = () => {
           className="text-center"
         >
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-6xl">
-            Free Temp Mail
-            <span className="block bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-              Instant • Private
+            Free Temporary Email
+            <span className="block bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent leading-normal pb-1">
+              Instant Disposable Temp Mail
             </span>
           </h1>
           <p className="mx-auto mb-6 max-w-lg text-lg text-muted-foreground">
-            Get a disposable email address instantly. No signup, no hassle. Emails auto-delete after 10 minutes.
+            Generate a free anonymous email address instantly. No registration, no spam. Your disposable inbox auto-deletes after 10 minutes.
           </p>
         </motion.div>
 
@@ -248,9 +248,9 @@ const Index = () => {
         {/* Features */}
         <div className="mt-16 grid gap-6 md:grid-cols-3 max-w-3xl w-full">
           {[
-            { icon: Zap, title: "Instant", desc: "Get your email in under 1 second" },
-            { icon: Shield, title: "Private", desc: "No signup, no tracking, no logs" },
-            { icon: Clock, title: "Auto-Delete", desc: "All data erased after 10 minutes" },
+            { icon: Zap, title: "Generate Free Temp Emails", desc: "Create your disposable email in under 1 second" },
+            { icon: Shield, title: "Secure Anonymous Inbox", desc: "No signup, no tracking, no logs" },
+            { icon: Clock, title: "Auto-Delete Disposable Inbox", desc: "All emails erased after 10 minutes" },
           ].map((f, i) => (
             <motion.div
               key={f.title}

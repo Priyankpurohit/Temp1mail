@@ -1,42 +1,48 @@
 import Link from "next/link";
-import { Mail, ArrowLeft, Calendar } from "lucide-react";
+import { Mail, ArrowLeft, Calendar, ArrowRight } from "lucide-react";
 import { Footer } from "@/components/Footer";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { Button } from "@/components/ui/button";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Blog - Temp1Mail",
+    title: "Blog - Temp1Mail | Disposable Email Tips & Privacy Guides",
     description:
-        "Tips, guides, and news about temporary email, online privacy, and staying safe on the internet.",
+        "Read expert guides on temporary email, online privacy, and staying safe. Learn how Temp1Mail helps protect your identity with free disposable email addresses.",
 };
 
 const posts = [
     {
-        title: "Why You Need a Temporary Email Address",
+        title: "Best Temporary Email Services in 2026: Why Temp1Mail Dominates",
         excerpt:
-            "Signing up for a new service shouldn't mean handing over your real inbox. Learn how disposable emails keep spam at bay and protect your identity.",
+            "We tested 20+ providers on speed, privacy, retention, and features. See how Temp1Mail stacks up against 10 Minute Mail, YOPmail, Guerrilla Mail, and more.",
+        date: "2026-03-05",
+        slug: "best-temporary-email-services-2026",
+        readTime: "7 min read",
+    },
+    {
+        title: "How to Use Disposable Email for Safe Online Signups",
+        excerpt:
+            "Sites like Facebook block temp mail domains. Learn step-by-step how to use disposable email to get OTPs without risking your real inbox.",
+        date: "2026-03-03",
+        slug: "disposable-email-safe-signups-guide",
+        readTime: "5 min read",
+    },
+    {
+        title: "Top 5 Reasons to Use Temporary Email for Privacy in 2026",
+        excerpt:
+            "In 2026, data breaches hit 1B+ records yearly. Discover why temporary email beats regular email for spam protection, phishing defense, and total privacy.",
         date: "2026-02-28",
-        slug: "#",
+        slug: "top-5-reasons-temporary-email-privacy",
+        readTime: "5 min read",
     },
     {
-        title: "5 Ways to Protect Your Online Privacy in 2026",
+        title: "Generating Custom Temp Emails: Bypass Site Blocks on Temp1Mail",
         excerpt:
-            "From VPNs to temp mail, here are five practical steps you can take today to reduce your digital footprint and stay anonymous online.",
+            "Public temp domains get blacklisted fast. Learn how custom disposable emails via Temp1Mail give you unblocked access with your own domain.",
         date: "2026-02-20",
-        slug: "#",
-    },
-    {
-        title: "Temp Mail vs Email Aliases: Which One Should You Use?",
-        excerpt:
-            "Both tools help you manage unwanted email, but they work differently. We break down the pros and cons of each approach.",
-        date: "2026-02-10",
-        slug: "#",
-    },
-    {
-        title: "How Disposable Emails Help You Avoid Phishing Attacks",
-        excerpt:
-            "Phishing emails are getting smarter. Discover how using throwaway addresses limits your exposure to scams and data breaches.",
-        date: "2026-01-25",
-        slug: "#",
+        slug: "custom-temp-emails-bypass-blocks",
+        readTime: "6 min read",
     },
 ];
 
@@ -51,48 +57,51 @@ export default function BlogPage() {
 
             {/* Header */}
             <header className="relative z-10 flex items-center justify-between px-6 py-4">
-                <Link
-                    href="/"
-                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-                >
-                    <Mail className="h-8 w-8 text-primary" />
-                    <span className="text-xl font-bold text-foreground">Temp1Mail</span>
-                </Link>
-                <Link
-                    href="/"
-                    className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                    <ArrowLeft className="h-4 w-4" />
-                    Back
-                </Link>
+                <div className="flex items-center gap-3">
+                    <Link href="/">
+                        <Button variant="ghost" size="icon" className="rounded-full">
+                            <ArrowLeft className="h-5 w-5" />
+                        </Button>
+                    </Link>
+                    <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                        <Mail className="h-8 w-8 text-primary" />
+                        <span className="text-xl font-bold text-foreground">Temp1Mail</span>
+                    </Link>
+                </div>
+                <ThemeToggle />
             </header>
 
             {/* Content */}
-            <main className="relative z-10 mx-auto max-w-3xl px-6 pt-8 pb-20">
+            <main className="relative z-10 mx-auto max-w-3xl px-6 pt-8 pb-24">
                 <h1 className="mb-2 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
                     Blog
                 </h1>
                 <p className="mb-10 text-muted-foreground">
-                    Tips, guides, and news about disposable email &amp; online privacy.
+                    Expert guides on disposable email, online privacy, and staying safe in 2026.
                 </p>
 
                 <div className="space-y-6">
                     {posts.map((post) => (
-                        <article
-                            key={post.title}
-                            className="glass-card rounded-xl p-6 transition-transform hover:scale-[1.01]"
-                        >
-                            <div className="mb-2 flex items-center gap-2 text-xs text-muted-foreground">
-                                <Calendar className="h-3.5 w-3.5" />
-                                {post.date}
-                            </div>
-                            <h2 className="mb-2 text-lg font-semibold text-foreground">
-                                {post.title}
-                            </h2>
-                            <p className="text-sm text-muted-foreground leading-relaxed">
-                                {post.excerpt}
-                            </p>
-                        </article>
+                        <Link key={post.slug} href={`/blog/${post.slug}`}>
+                            <article className="glass-card rounded-xl p-6 transition-all hover:scale-[1.01] hover:border-primary/30 mb-6">
+                                <div className="mb-2 flex items-center gap-3 text-xs text-muted-foreground">
+                                    <span className="flex items-center gap-1.5">
+                                        <Calendar className="h-3.5 w-3.5" />
+                                        {post.date}
+                                    </span>
+                                    <span>{post.readTime}</span>
+                                </div>
+                                <h2 className="mb-2 text-lg font-semibold text-foreground">
+                                    {post.title}
+                                </h2>
+                                <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                                    {post.excerpt}
+                                </p>
+                                <span className="inline-flex items-center gap-1 text-xs font-medium text-primary">
+                                    Read more <ArrowRight className="h-3 w-3" />
+                                </span>
+                            </article>
+                        </Link>
                     ))}
                 </div>
             </main>
