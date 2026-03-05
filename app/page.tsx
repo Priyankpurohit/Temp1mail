@@ -114,22 +114,17 @@ const Index = () => {
       {/* Hero */}
       <main className="relative z-10 flex flex-col items-center px-6 pt-6 pb-20 md:pt-12">
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
+        <div className="text-center animate-fade-in-up opacity-0">
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-6xl">
             Free Temporary Email
             <span className="block bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent leading-normal pb-1">
-              Instant Disposable Temp Mail
+              Instant • Disposable • Private
             </span>
           </h1>
           <p className="mx-auto mb-6 max-w-lg text-lg text-muted-foreground">
-            Generate a free anonymous email address instantly. No registration, no spam. Your disposable inbox auto-deletes after 10 minutes.
+            Free anonymous email address instantly. No registration, no spam. Your disposable inbox auto-deletes after 10 minutes.
           </p>
-        </motion.div>
+        </div>
 
         {/* Card */}
         <motion.div
@@ -248,9 +243,9 @@ const Index = () => {
         {/* Features */}
         <div className="mt-16 grid gap-6 md:grid-cols-3 max-w-3xl w-full">
           {[
-            { icon: Zap, title: "Generate Free Temp Emails", desc: "Create your disposable email in under 1 second" },
-            { icon: Shield, title: "Secure Anonymous Inbox", desc: "No signup, no tracking, no logs" },
-            { icon: Clock, title: "Auto-Delete Disposable Inbox", desc: "All emails erased after 10 minutes" },
+            { icon: Zap, title: "Instant", desc: "Get your email in under 1 second" },
+            { icon: Shield, title: "Private Inbox", desc: "No signup, no tracking, no logs" },
+            { icon: Clock, title: "Auto-Delete", desc: "All emails erased after 10 minutes" },
           ].map((f, i) => (
             <motion.div
               key={f.title}

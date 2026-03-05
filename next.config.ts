@@ -1,22 +1,18 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* Favicon rewrite - serve icon.svg for /favicon.ico requests */
-  async rewrites() {
-    return [
-      {
-        source: "/favicon.ico",
-        destination: "/icon.svg",
-      },
-    ];
-  },
-
-  /* Performance: compress output, enable granular chunking */
+  /* Performance: compress output */
   compress: true,
 
   /* Cache static assets aggressively */
   async headers() {
     return [
+      {
+        source: "/favicon.ico",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
       {
         source: "/icon.svg",
         headers: [
