@@ -2,8 +2,9 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 
 const footerLinks = [
-    { label: "FAQs", href: "/faq" },
+    { label: "About Us", href: "/about" },
     { label: "Blog", href: "/blog" },
+    { label: "Terms of Service", href: "/terms" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Disclaimer", href: "/disclaimer" },
     { label: "Contact", href: "/contact" },
@@ -11,8 +12,8 @@ const footerLinks = [
 
 export function Footer() {
     return (
-        <footer className="relative z-10 border-t border-border bg-background/50">
-            <div className="mx-auto max-w-5xl px-6 py-5">
+        <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/80 backdrop-blur-md">
+            <div className="mx-auto max-w-5xl px-6 py-3">
                 <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                     {footerLinks.map((link) => (
                         <Link

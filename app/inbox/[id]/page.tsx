@@ -11,6 +11,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { EmailCard, type EmailData } from "@/components/EmailCard";
 import { toast } from "@/hooks/use-toast";
+import { Footer } from "@/components/Footer";
 
 interface MailboxData {
   id: string;
@@ -133,7 +134,7 @@ export default function InboxPage() {
       </div>
 
       {/* Header */}
-      <header className="relative z-10 flex items-center justify-between border-b border-border px-4 py-3 md:px-6">
+      <header className="relative z-10 flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-3">
           <Link href="/">
             <Button variant="ghost" size="icon" className="rounded-full">
@@ -141,8 +142,8 @@ export default function InboxPage() {
             </Button>
           </Link>
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Mail className="h-5 w-5 text-primary" />
-            <span className="text-sm font-bold text-foreground">temp1mail</span>
+            <Mail className="h-8 w-8 text-primary" />
+            <span className="text-xl font-bold text-foreground">Temp1Mail</span>
           </Link>
         </div>
         <ThemeToggle />
@@ -229,6 +230,8 @@ export default function InboxPage() {
         </div>
 
       </div>
+
+      <Footer />
     </div>
   );
 }

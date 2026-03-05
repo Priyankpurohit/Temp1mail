@@ -7,7 +7,7 @@ import { prisma } from "@/lib/prisma";
  * Delete all expired mailboxes (and their emails via Prisma cascade).
  * Called automatically by Vercel Cron every 5 minutes.
  *
- * Protected by CRON_SECRET — Vercel sends this automatically.
+ * Protected by CRON_SECRET - Vercel sends this automatically.
  */
 export async function GET(req: Request) {
     // Verify the request is from Vercel Cron
@@ -19,7 +19,7 @@ export async function GET(req: Request) {
     }
 
     try {
-        // Delete all expired mailboxes — emails are cascade-deleted automatically
+        // Delete all expired mailboxes - emails are cascade-deleted automatically
         const result = await prisma.mailbox.deleteMany({
             where: {
                 expiresAt: { lt: new Date() },

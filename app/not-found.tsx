@@ -40,7 +40,7 @@ export default function NotFound() {
 
             {/* Footer */}
             <footer className="absolute bottom-0 w-full border-t border-border py-6 text-center text-sm text-muted-foreground">
-                © {new Date().getFullYear()} temp1mail.com — Free disposable email service
+                © {new Date().getFullYear()} temp1mail.com - Free disposable email service
             </footer>
         </div>
     );

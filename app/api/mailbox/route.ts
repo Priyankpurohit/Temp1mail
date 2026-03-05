@@ -7,7 +7,7 @@ const MAIL_DOMAIN = process.env.MAILGUN_DOMAIN || "temp1mail.com";
 
 /**
  * On-demand cleanup: delete up to 10 expired mailboxes.
- * Runs in the background every time a new mailbox is created.
+ * Runs in the background after the response is sent.
  */
 async function cleanupExpired() {
     try {
@@ -47,14 +47,14 @@ async function trackMailboxCreated() {
  * POST /api/mailbox
  *
  * Create a new temporary mailbox.
- * Rate limited: 5 mailboxes per IP per 10 minutes.
- * Also triggers on-demand cleanup and stats tracking.
+ * Rate limited: 8 mailboxes per IP per 10 minutes.
+ * Optimised for speed - cleanup & stats run AFTER the response.
  */
 export async function POST(req: NextRequest) {
     try {
         // ─── Rate limit check ──────────────────────────────
         const ip = getClientIp(req);
-        const { allowed, remaining, resetAt } = rateLimit(ip, 5, 10 * 60 * 1000);
+        const { allowed, remaining, resetAt } = rateLimit(ip, 8, 10 * 60 * 1000);
 
         if (!allowed) {
             const retryAfter = Math.ceil((resetAt - Date.now()) / 1000);
@@ -70,17 +70,12 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // ─── Fire-and-forget background tasks ──────────────
-        cleanupExpired();
-        trackMailboxCreated();
-
         // ─── Parse optional address from client ─────────────
         let address: string;
         try {
             const body = await req.json();
             if (body.address && typeof body.address === "string") {
-                // Validate: must match pattern like "abc123@temp1mail.com"
-                const pattern = /^[a-z0-9]{6,12}@[a-z0-9.-]+$/;
+                const pattern = /^[a-z0-9]{3,12}@[a-z0-9.-]+$/;
                 if (!pattern.test(body.address)) {
                     return NextResponse.json(
                         { error: "Invalid email address format" },
@@ -92,29 +87,53 @@ export async function POST(req: NextRequest) {
                 address = generateEmailAddress(MAIL_DOMAIN);
             }
         } catch {
-            // No JSON body — generate server-side
             address = generateEmailAddress(MAIL_DOMAIN);
         }
 
         const expiresAt = getExpirationDate(MAILBOX_LIFETIME_MINUTES);
 
-        // Use upsert: if webhook already auto-created this mailbox, return existing one
+        // ─── Create mailbox FIRST (critical path) ───────────
         const mailbox = await prisma.mailbox.upsert({
             where: { address },
             create: {
                 address,
                 expiresAt,
             },
-            update: {}, // Keep existing data if already created
+            update: {},
+            include: {
+                emails: {
+                    orderBy: { receivedAt: "desc" },
+                    select: {
+                        id: true,
+                        fromAddr: true,
+                        fromName: true,
+                        subject: true,
+                        bodyHtml: true,
+                        bodyText: true,
+                        isRead: true,
+                        receivedAt: true,
+                    },
+                },
+            },
         });
 
-        return NextResponse.json(
+        // ─── Send response immediately ──────────────────────
+        const response = NextResponse.json(
             {
                 id: mailbox.id,
                 address: mailbox.address,
                 token: mailbox.token,
                 expiresAt: mailbox.expiresAt.toISOString(),
                 createdAt: mailbox.createdAt.toISOString(),
+                emails: mailbox.emails.map((e: { id: string; fromAddr: string; fromName: string | null; subject: string; bodyHtml: string | null; bodyText: string | null; isRead: boolean; receivedAt: Date }) => ({
+                    id: e.id,
+                    from: e.fromName ? `${e.fromName} <${e.fromAddr}>` : e.fromAddr,
+                    subject: e.subject,
+                    body_html: e.bodyHtml,
+                    body_text: e.bodyText,
+                    isRead: e.isRead,
+                    receivedAt: e.receivedAt.toISOString(),
+                })),
             },
             {
                 status: 201,
@@ -123,6 +142,13 @@ export async function POST(req: NextRequest) {
                 },
             }
         );
+
+        // ─── Fire-and-forget AFTER building the response ────
+        // These run in the background and don't block the response
+        cleanupExpired().catch(() => { });
+        trackMailboxCreated().catch(() => { });
+
+        return response;
     } catch (error) {
         console.error("Failed to create mailbox:", error);
         const message = error instanceof Error ? error.message : String(error);

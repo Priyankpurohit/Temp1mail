@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
                 );
             }
         } else {
-            console.warn("MAILGUN_API_KEY not set — skipping signature verification");
+            console.warn("MAILGUN_API_KEY not set - skipping signature verification");
         }
 
         // ─── Parse email fields ──────────────────────────────

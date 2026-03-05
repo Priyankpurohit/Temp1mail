@@ -72,7 +72,7 @@ export default function PrivacyPage() {
                             3. Data Retention
                         </h2>
                         <p>
-                            All mailbox data — including email addresses, messages, and attachments — is permanently deleted after the mailbox expires (10 minutes from creation). We do not maintain backups of expired mailboxes.
+                            All mailbox data (including email addresses, messages, and attachments) is permanently deleted after the mailbox expires (10 minutes from creation). We do not maintain backups of expired mailboxes.
                         </p>
                     </section>
 

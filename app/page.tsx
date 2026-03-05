@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Copy, Mail, Shield, Zap, Clock, Check, RefreshCw } from "lucide-react";
+import { Copy, Mail, Shield, Zap, Clock, Check, RefreshCw, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 import { toast } from "@/hooks/use-toast";
 import { Footer } from "@/components/Footer";
+import { startMailboxCreation } from "@/lib/pending-mailbox";
 
 const MAIL_DOMAIN = "temp1mail.com";
 const CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -27,6 +28,31 @@ interface MailboxResponse {
   token: string;
   expiresAt: string;
   createdAt: string;
+}
+
+function FAQItem({ question, answer }: { question: string; answer: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="glass-card rounded-xl overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between px-5 py-4 text-left"
+      >
+        <span className="font-medium text-foreground text-sm md:text-base">{question}</span>
+        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+          <ChevronDown className="h-4 w-4 text-muted-foreground shrink-0 ml-2" />
+        </motion.div>
+      </button>
+      <motion.div
+        initial={false}
+        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.25, ease: "easeInOut" }}
+        className="overflow-hidden"
+      >
+        <p className="px-5 pb-4 text-sm text-muted-foreground leading-relaxed">{answer}</p>
+      </motion.div>
+    </div>
+  );
 }
 
 const Index = () => {
@@ -49,29 +75,15 @@ const Index = () => {
     setMode("custom");
   };
 
-  /** Create the mailbox in DB and navigate to inbox */
-  const handleOpenInbox = async () => {
+  /** Fire API call + navigate simultaneously - zero perceived delay */
+  const handleOpenInbox = () => {
     if (!username.trim()) return;
     const fullAddress = `${username}@${MAIL_DOMAIN}`;
     setIsOpening(true);
-    try {
-      const res = await fetch("/api/mailbox", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ address: fullAddress }),
-      });
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.detail || errData.error || "Failed to create mailbox");
-      }
-      const data: MailboxResponse = await res.json();
-      router.push(`/inbox/${data.token}`);
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : "Unknown error";
-      toast({ title: "Error", description: msg });
-    } finally {
-      setIsOpening(false);
-    }
+    // Start the API call NOW (in the background)
+    startMailboxCreation(fullAddress);
+    // Navigate immediately - inbox page picks up the in-flight request
+    router.replace(`/inbox?email=${encodeURIComponent(fullAddress)}`);
   };
 
   const handleCopy = async () => {
@@ -100,7 +112,7 @@ const Index = () => {
       </header>
 
       {/* Hero */}
-      <main className="relative z-10 flex flex-col items-center px-6 pt-12 pb-20 md:pt-24">
+      <main className="relative z-10 flex flex-col items-center px-6 pt-6 pb-20 md:pt-12">
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -114,7 +126,7 @@ const Index = () => {
               Instant • Private
             </span>
           </h1>
-          <p className="mx-auto mb-10 max-w-lg text-lg text-muted-foreground">
+          <p className="mx-auto mb-6 max-w-lg text-lg text-muted-foreground">
             Get a disposable email address instantly. No signup, no hassle. Emails auto-delete after 10 minutes.
           </p>
         </motion.div>
@@ -253,6 +265,44 @@ const Index = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* FAQs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9 }}
+          className="mt-16 w-full max-w-3xl"
+        >
+          <h2 className="mb-6 text-center text-2xl font-bold text-foreground md:text-3xl">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-3">
+            <FAQItem
+              question="What is Temp1Mail?"
+              answer="Temp1Mail provides free, instant disposable email addresses. Use them to sign up for services, receive verification codes, or protect your real email from spam - all without registration."
+            />
+            <FAQItem
+              question="How long does a temporary email last?"
+              answer="Each temporary email address lasts for 10 minutes from creation. After that, the mailbox and all emails are automatically and permanently deleted."
+            />
+            <FAQItem
+              question="Do I need to sign up or register?"
+              answer="No! Just visit the site, type or generate an email address, and start receiving emails instantly. Zero registration, zero personal information required."
+            />
+            <FAQItem
+              question="Can I receive attachments?"
+              answer="Currently, Temp1Mail supports receiving plain text and HTML emails. Attachment support may be added in future updates."
+            />
+            <FAQItem
+              question="Is Temp1Mail free to use?"
+              answer="Yes, Temp1Mail is completely free. There are no hidden fees, no premium tiers, and no limits on how many temporary emails you can create."
+            />
+            <FAQItem
+              question="Can someone else access my temporary inbox?"
+              answer="Your inbox is protected by a unique secret token in the URL. Only someone with that exact link can access your inbox. Never share your inbox URL if you want to keep your emails private."
+            />
+          </div>
+        </motion.div>
 
       </main>
 

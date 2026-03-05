@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://temp1mail.com
+
+# Sitemaps
+Sitemap: https://temp1mail.com/sitemap.xml
