@@ -7,7 +7,7 @@ export function Logo() {
             <Mail className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold flex items-center text-foreground">
                 Temp
-                <Zap className="h-[0.8em] w-auto -mx-1 text-primary fill-primary scale-x-50 rotate-12" />
+                <Zap className="h-[3em] w-[2em] -mx-1 text-primary fill-primary scale-x-50 rotate-12" />
                 Mail
             </span>
         </Link>

@@ -12,7 +12,7 @@ const footerLinks = [
 
 export function Footer() {
     return (
-        <footer className="mt-auto border-t border-border bg-background/80 backdrop-blur-md">
+        <footer className="mt-2px border-t border-border bg-background/80 backdrop-blur-md">
             <div className="mx-auto max-w-5xl px-6 py-3">
                 <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                     {footerLinks.map((link) => (

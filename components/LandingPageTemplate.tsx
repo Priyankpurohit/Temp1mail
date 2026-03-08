@@ -83,7 +83,7 @@ export function LandingPageTemplate({
             </header>
 
             {/* Hero */}
-            <main className="relative z-10 flex flex-col items-center px-6 pt-6 pb-20 md:pt-12">
+            <main className="relative z-10 flex flex-col items-center px-6 pt-6 pb-0 md:pt-12">
                 <div className="text-center w-full">
                     <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground md:text-6xl">
                         {heading}

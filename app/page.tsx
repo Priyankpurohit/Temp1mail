@@ -50,7 +50,7 @@ const Index = () => {
       </header>
 
       {/* Hero */}
-      <main className="relative z-10 flex flex-col items-center px-6 pt-6 pb-20 md:pt-12">
+      <main className="relative z-10 flex flex-col items-center px-6 pt-6 pb-0 md:pt-12">
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
