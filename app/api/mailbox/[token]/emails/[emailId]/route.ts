@@ -13,45 +13,34 @@ export async function GET(_req: NextRequest, { params }: RouteParams) {
     try {
         const { token, emailId } = await params;
 
-        // Verify the mailbox exists and owns this email
-        const mailbox = await prisma.mailbox.findUnique({
-            where: { token },
-        });
-
-        if (!mailbox) {
-            return NextResponse.json(
-                { error: "Mailbox not found" },
-                { status: 404 }
-            );
-        }
-
-        if (new Date() > mailbox.expiresAt) {
-            return NextResponse.json(
-                { error: "Mailbox has expired" },
-                { status: 410 }
-            );
-        }
-
+        // ─── Single query: find email via mailbox token ──────
+        // Replaces 3 sequential queries with 1 by joining through
+        // the mailbox relation and checking expiry in the WHERE clause.
         const email = await prisma.email.findFirst({
             where: {
                 id: emailId,
-                mailboxId: mailbox.id,
+                mailbox: {
+                    token,
+                    expiresAt: { gt: new Date() },
+                },
+            },
+            include: {
+                mailbox: { select: { token: true } },
             },
         });
 
         if (!email) {
             return NextResponse.json(
-                { error: "Email not found" },
+                { error: "Email not found or mailbox expired" },
                 { status: 404 }
             );
         }
 
-        // Mark as read
+        // ─── Mark as read (fire-and-forget, doesn't block response)
         if (!email.isRead) {
-            await prisma.email.update({
-                where: { id: email.id },
-                data: { isRead: true },
-            });
+            prisma.email
+                .update({ where: { id: email.id }, data: { isRead: true } })
+                .catch(() => { });
         }
 
         return NextResponse.json({

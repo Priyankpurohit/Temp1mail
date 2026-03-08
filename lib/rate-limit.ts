@@ -13,6 +13,28 @@ interface RateLimitEntry {
 
 const store = new Map<string, RateLimitEntry>();
 
+// ─── Periodic pruning to prevent unbounded memory growth ─────
+let lastPruneAt = 0;
+const PRUNE_INTERVAL_MS = 60 * 1000; // prune at most once per minute
+
+function pruneExpiredEntries(): void {
+    const now = Date.now();
+    if (now - lastPruneAt < PRUNE_INTERVAL_MS) return;
+    lastPruneAt = now;
+
+    // Safety valve: if the store is huge, just clear it
+    if (store.size > 10_000) {
+        store.clear();
+        return;
+    }
+
+    for (const [key, entry] of store) {
+        if (now > entry.resetAt) {
+            store.delete(key);
+        }
+    }
+}
+
 /**
  * Check whether a given key (usually an IP address) has exceeded
  * the rate limit.
@@ -28,9 +50,13 @@ export function rateLimit(
     windowMs: number = 10 * 60 * 1000 // 10 minutes
 ): { allowed: boolean; remaining: number; resetAt: number } {
     const now = Date.now();
+
+    // Periodically prune stale entries
+    pruneExpiredEntries();
+
     const entry = store.get(key);
 
-    // Clean up expired entry
+    // Clean up expired entry for this key
     if (entry && now > entry.resetAt) {
         store.delete(key);
     }

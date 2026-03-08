@@ -1,5 +1,6 @@
+import { Logo } from "@/components/Logo";
 import Link from "next/link";
-import { Mail, ArrowLeft, Calendar, ArrowRight } from "lucide-react";
+import { Mail, ArrowLeft, Calendar, ArrowRight, Zap } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
@@ -63,10 +64,7 @@ export default function BlogPage() {
                             <ArrowLeft className="h-5 w-5" />
                         </Button>
                     </Link>
-                    <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <Mail className="h-8 w-8 text-primary" />
-                        <span className="text-xl font-bold text-foreground">Temp1Mail</span>
-                    </Link>
+                    <Logo />
                 </div>
                 <ThemeToggle />
             </header>

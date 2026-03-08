@@ -1,10 +1,11 @@
 "use client";
+import { Logo } from "@/components/Logo";
 
 import { useEffect, useState, useCallback, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Copy, Check, Mail, RefreshCw, Trash2 } from "lucide-react";
+import { ArrowLeft, Copy, Check, Mail, RefreshCw, Trash2, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { CountdownTimer } from "@/components/CountdownTimer";
@@ -12,6 +13,7 @@ import { EmailCard, type EmailData } from "@/components/EmailCard";
 import { toast } from "@/hooks/use-toast";
 import { Footer } from "@/components/Footer";
 import { getPendingMailboxCreation } from "@/lib/pending-mailbox";
+import { useMailboxStream } from "@/hooks/use-mailbox-stream";
 
 interface MailboxData {
     id: string;
@@ -65,6 +67,20 @@ function InboxContent() {
                     body: JSON.stringify({ address: email }),
                 }));
 
+                // ─── Rate limit feedback ───────────────────────
+                if (response.status === 429) {
+                    const retryAfter = parseInt(response.headers.get("Retry-After") || "60", 10);
+                    const minutes = Math.ceil(retryAfter / 60);
+                    toast({
+                        title: "⏳ Too many mailboxes created",
+                        description: `Rate Limit Reached - Kindley Wait For ${minutes} Minute${minutes > 1 ? "s" : ""}.`,
+                        variant: "destructive",
+                    });
+                    setError(`Rate Limit Reached - Kindley Wait For ${minutes} Minute${minutes > 1 ? "s" : ""}.`);
+                    setLoading(false);
+                    return;
+                }
+
                 if (!response.ok) {
                     const errData = await response.json().catch(() => ({}));
                     throw new Error(errData.detail || errData.error || "Failed to create mailbox");
@@ -87,7 +103,8 @@ function InboxContent() {
                 setLoading(false);
 
                 // Silently update the URL to the token-based URL (no page reload)
-                window.history.replaceState(null, "", `/inbox/${data.token}`);
+                // Passing window.history.state is CRITICAL so we don't break Next.js's back button history stack
+                window.history.replaceState(window.history.state, "", `/inbox/${data.token}`);
             } catch (err) {
                 const msg = err instanceof Error ? err.message : "Unknown error";
                 setError(msg);
@@ -99,44 +116,35 @@ function InboxContent() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    /** Step 2: Auto-refresh emails once we have a token */
-    const fetchMailbox = useCallback(async () => {
-        if (!token) return;
-        try {
-            const res = await fetch(`/api/mailbox/${token}`);
+    /** Step 2: Real-time email updates via SSE (with polling fallback) */
+    const mapEmails = useCallback((emails: { id: string; from: string; subject: string; body_html: string | null; body_text: string | null; isRead: boolean; receivedAt: string }[]) => {
+        return emails.map((e) => ({
+            id: e.id,
+            from_email: e.from,
+            subject: e.subject,
+            body_text: e.body_text || "",
+            body_html: e.body_html || "",
+            received_at: e.receivedAt,
+        }));
+    }, []);
 
-            if (res.status === 404) {
-                setError("Mailbox not found");
-                return;
-            }
-            if (res.status === 410) {
-                setError("This mailbox has expired");
-                return;
-            }
-            if (!res.ok) return;
-
-            const data = await res.json();
-            setMailbox((prev) => prev ? { ...prev, ...data } : data);
-            setEmails(
-                data.emails.map((e: { id: string; from: string; subject: string; body_html: string | null; body_text: string | null; isRead: boolean; receivedAt: string }) => ({
-                    id: e.id,
-                    from_email: e.from,
-                    subject: e.subject,
-                    body_text: e.body_text || "",
-                    body_html: e.body_html || "",
-                    received_at: e.receivedAt,
-                }))
-            );
-        } catch {
-            // Silent fail on refresh - don't break the UI
-        }
-    }, [token]);
-
-    useEffect(() => {
-        if (!token || error) return;
-        const interval = setInterval(fetchMailbox, 1000);
-        return () => clearInterval(interval);
-    }, [fetchMailbox, token, error]);
+    useMailboxStream({
+        token,
+        enabled: !error && !loading,
+        onMailbox: (data) => {
+            setMailbox((prev) => prev ? { ...prev, ...data, token: prev.token } : { ...data, token: token! });
+            setEmails(mapEmails(data.emails));
+        },
+        onEmails: (emails) => {
+            setEmails(mapEmails(emails));
+        },
+        onExpired: () => {
+            setError("This mailbox has expired");
+        },
+        onError: (msg) => {
+            setError(msg);
+        },
+    });
 
     const handleCopy = async () => {
         const address = mailbox?.address || emailRef.current;
@@ -158,26 +166,31 @@ function InboxContent() {
         }
     };
 
-    // Error state
     if (error) {
         return (
             <div className="flex min-h-screen flex-col items-center justify-center bg-background p-6 text-center">
-                <Mail className="h-16 w-16 text-muted-foreground/30 mb-4" />
+                <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3 }}>
+                    <Mail className="h-16 w-16 text-muted-foreground/30 mb-4" />
+                </motion.div>
                 <h2 className="text-xl font-semibold text-foreground mb-2">{error}</h2>
-                <p className="text-sm text-muted-foreground mb-6">
-                    This mailbox may have expired or doesn&apos;t exist.
-                </p>
-                <Link href="/">
-                    <Button className="bg-gradient-to-r from-primary to-primary-glow text-primary-foreground">
-                        Generate New Email
-                    </Button>
-                </Link>
+                {!error.includes("Rate Limit Reached") && (
+                    <p className="text-sm text-muted-foreground mb-6">
+                        This mailbox may have expired or doesn&apos;t exist.
+                    </p>
+                )}
+                <div className="mt-[70px]">
+                    <Link href="/">
+                        <Button className="bg-gradient-to-r from-primary to-primary-glow text-primary-foreground">
+                            Generate New Email
+                        </Button>
+                    </Link>
+                </div>
             </div>
         );
     }
 
     return (
-        <div className="relative min-h-screen bg-background">
+        <div className="relative min-h-screen flex flex-col bg-background">
             {/* Background */}
             <div className="pointer-events-none absolute inset-0">
                 <div className="absolute -left-1/4 -top-1/4 h-[400px] w-[400px] rounded-full bg-primary/8 blur-[100px]" />
@@ -186,29 +199,25 @@ function InboxContent() {
             {/* Header */}
             <header className="relative z-10 flex items-center justify-between px-6 py-4">
                 <div className="flex items-center gap-3">
-                    <Link href="/">
-                        <Button variant="ghost" size="icon" className="rounded-full">
-                            <ArrowLeft className="h-5 w-5" />
-                        </Button>
-                    </Link>
-                    <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <Mail className="h-8 w-8 text-primary" />
-                        <span className="text-xl font-bold text-foreground">Temp1Mail</span>
-                    </Link>
+                    <Logo />
                 </div>
                 <ThemeToggle />
             </header>
 
-            <div className="relative z-10 mx-auto flex max-w-5xl gap-6 px-4 py-6 md:px-6 pb-20">
+            <div className="relative z-10 mx-auto flex items-start w-full max-w-5xl gap-2 sm:gap-4 px-4 py-6 md:px-6 pb-20">
+                <Button variant="ghost" size="icon" onClick={() => router.back()} className="mt-2 sm:mt-3 shrink-0 h-10 w-10 sm:h-12 sm:w-12 rounded-full hover:bg-muted/50" title="Go back">
+                    <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground hover:text-foreground transition-colors" />
+                </Button>
+
                 {/* Main content */}
-                <div className="flex-1 min-w-0 space-y-6">
+                <div className="flex-1 min-w-0 space-y-4 sm:space-y-6">
                     {/* Email address bar */}
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="glass-card rounded-xl p-4"
                     >
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-3">
                             <div className="flex-1 min-w-0">
                                 <p className="text-xs text-muted-foreground mb-1">Your temporary email</p>
                                 <p className="truncate font-mono text-sm font-semibold text-foreground">
@@ -226,7 +235,7 @@ function InboxContent() {
                     </motion.div>
 
                     {/* Refresh indicator */}
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground px-1">
                         <RefreshCw className="h-3 w-3 animate-spin" />
                         {loading ? "Creating mailbox..." : "Auto-refreshing"}
                     </div>
@@ -246,6 +255,8 @@ function InboxContent() {
                                 Send an email to{" "}
                                 <a
                                     href={`mailto:${mailbox?.address || emailRef.current}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="font-mono text-primary no-underline hover:no-underline hover:opacity-80 transition-opacity"
                                 >
                                     {mailbox?.address || emailRef.current}

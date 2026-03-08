@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { rateLimit, getClientIp } from "@/lib/rate-limit";
+import { triggerCleanup } from "@/lib/cleanup";
 import crypto from "node:crypto";
 
 const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY || "";
+const MAIL_DOMAIN = process.env.MAILGUN_DOMAIN || "temp1mail.com";
 
 /**
  * POST /api/webhook/mailgun
@@ -21,6 +24,16 @@ const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY || "";
  */
 export async function POST(req: NextRequest) {
     try {
+        // ─── Rate limit webhook requests ─────────────────────
+        const ip = getClientIp(req);
+        const { allowed } = rateLimit(`webhook:${ip}`, 100, 60 * 1000); // 100/min per IP
+        if (!allowed) {
+            return NextResponse.json(
+                { error: "Rate limited" },
+                { status: 429 }
+            );
+        }
+
         const formData = await req.formData();
 
         // ─── Verify Mailgun signature ────────────────────────
@@ -28,7 +41,6 @@ export async function POST(req: NextRequest) {
         const token = formData.get("token") as string;
         const signature = formData.get("signature") as string;
 
-        // Skip verification if API key is not configured (for initial testing)
         if (MAILGUN_API_KEY) {
             if (!verifyMailgunSignature(timestamp, token, signature)) {
                 console.warn("Invalid Mailgun signature");
@@ -37,8 +49,15 @@ export async function POST(req: NextRequest) {
                     { status: 403 }
                 );
             }
+        } else if (process.env.NODE_ENV === "production") {
+            // In production, NEVER allow unverified webhooks
+            console.error("MAILGUN_API_KEY not set in production — rejecting webhook");
+            return NextResponse.json(
+                { error: "Webhook not configured" },
+                { status: 500 }
+            );
         } else {
-            console.warn("MAILGUN_API_KEY not set - skipping signature verification");
+            console.warn("MAILGUN_API_KEY not set — skipping signature verification (dev only)");
         }
 
         // ─── Parse email fields ──────────────────────────────
@@ -57,7 +76,6 @@ export async function POST(req: NextRequest) {
         }
 
         // ─── Find or auto-create the mailbox ─────────────────
-        const MAIL_DOMAIN = "temp1mail.com";
         let mailbox = await prisma.mailbox.findUnique({
             where: { address: recipient },
         });
@@ -110,6 +128,9 @@ export async function POST(req: NextRequest) {
             create: { id: "global", mailboxes: 0, emails: 1 },
             update: { emails: { increment: 1 } },
         }).catch((err: unknown) => console.error("Stats tracking error:", err));
+
+        // ─── Cleanup expired mailboxes (throttled, fire-and-forget)
+        triggerCleanup();
 
         return NextResponse.json({ message: "Stored" }, { status: 200 });
     } catch (error) {

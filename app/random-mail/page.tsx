@@ -1,35 +1,41 @@
-"use client";
+import { LandingPageTemplate } from "@/components/LandingPageTemplate";
+import Link from "next/link";
 
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { startMailboxCreation } from "@/lib/pending-mailbox";
-
-const CHARS = "abcdefghijklmnopqrstuvwxyz0123456789";
-
-function randomUsername(): string {
-    let name = "";
-    for (let i = 0; i < 8; i++) {
-        name += CHARS[Math.floor(Math.random() * CHARS.length)];
-    }
-    return name;
-}
-
-/**
- * /random-mail → instantly generates a random email and opens the inbox.
- * This page exists for SEO internal linking purposes.
- */
 export default function RandomMailPage() {
-    const router = useRouter();
-    useEffect(() => {
-        const username = randomUsername();
-        const fullAddress = `${username}@temp1mail.com`;
-        startMailboxCreation(fullAddress);
-        router.replace(`/inbox?email=${encodeURIComponent(fullAddress)}`);
-    }, [router]);
-
     return (
-        <div className="flex min-h-screen items-center justify-center bg-background">
-            <p className="text-muted-foreground">Generating random email...</p>
-        </div>
+        <LandingPageTemplate
+            heading="Random Mail"
+            subheading="Random • Instant • Free"
+            intro="Free random mail address instantly. No registration, no spam. Your disposable inbox auto-deletes after 10 minutes."
+            features={[
+                { icon: "Zap", title: "Instant", desc: "Get your email in under 1 second" },
+                { icon: "Shield", title: "Private Inbox", desc: "No signup, no tracking, no logs" },
+                { icon: "Clock", title: "Auto-Delete", desc: "All emails erased after 10 minutes" }
+            ]}
+            faqs={[
+                { 
+                    question: "What is a random mail?", 
+                    answer: <>A random mail provides free, instant disposable email addresses. If you need something slightly different, you can also try a <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link>, a <Link href="/temp-mail-free" className="text-primary hover:underline">free temp mail</Link>, or a <Link href="/burner-email" className="text-primary hover:underline">burner email</Link> to sign up for services without registration.</> 
+                },
+                { 
+                    question: "How long does a random mail last?", 
+                    answer: <>Each random mail address lasts for 10 minutes from creation. This operates similarly to a <Link href="/choice-mail" className="text-primary hover:underline">choice mail</Link>, a <Link href="/tempemail" className="text-primary hover:underline">temp email</Link>, or a <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link>, automatically and permanently deleting all messages afterwards.</> 
+                },
+                { 
+                    question: "Is this random mail free to use?", 
+                    answer: <>Yes, this random mail service is completely free. We also offer other tools like the <Link href="/disposable-mail" className="text-primary hover:underline">disposable mail</Link>, the <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link>, and the <Link href="/generate-custom-mail" className="text-primary hover:underline">custom mail</Link> with absolutely no hidden fees and no limits.</> 
+                },
+                { 
+                    question: "Can I choose my own random mail address?", 
+                    answer: <>Absolutely! You can type in any custom prefix, or let us generate one for you. For more tailored addresses, consider creating a <Link href="/temporary-mail" className="text-primary hover:underline">temporary mail</Link> or a <Link href="/free-mail" className="text-primary hover:underline">free mail</Link> for your specific needs.</> 
+                },
+                { 
+                    question: "Why use a random mail instead of my real email?", 
+                    answer: <>Using a random mail protects your primary inbox from data leaks and marketing spam. Much like a <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link> or a <Link href="/temp-email" className="text-primary hover:underline">temp email</Link>, it acts as a reliable shield between your private details and potentially untrustworthy websites.</> 
+                }
+            ]}
+            ctaText="Create Random Mail"
+            defaultMode="random"
+        />
     );
 }

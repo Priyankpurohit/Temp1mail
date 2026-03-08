@@ -58,18 +58,13 @@ export function CountdownTimer({
     <div className={cn("w-full", className)}>
       {/* Timer text */}
       <div className="flex items-center justify-between mb-2">
-        <span className={cn("text-sm font-semibold tracking-wide", textColor)}>
+        <span className={cn("text-sm font-semibold tracking-wide", textColor)} suppressHydrationWarning>
           {expired ? (
             "⏰ Mailbox Expired"
           ) : (
             `${mins}m ${secs.toString().padStart(2, "0")}s remaining`
           )}
         </span>
-        {!expired && (
-          <span className="text-xs text-muted-foreground opacity-50">
-            {lifetimeMinutes}m lifetime
-          </span>
-        )}
       </div>
 
       {/* Full-width progress bar */}
@@ -77,6 +72,7 @@ export function CountdownTimer({
         <div
           className={cn("h-full rounded-full transition-all duration-1000 ease-linear", barColor)}
           style={{ width: `${pct}%` }}
+          suppressHydrationWarning
         />
       </div>
     </div>

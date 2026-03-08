@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimit, getClientIp } from "@/lib/rate-limit";
 
 const MAILGUN_API_KEY = process.env.MAILGUN_API_KEY || "";
 const MAILGUN_DOMAIN = process.env.MAILGUN_DOMAIN || "temp1mail.com";
@@ -6,6 +7,20 @@ const CONTACT_TO_EMAIL = process.env.CONTACT_EMAIL || "admin@temp1mail.com";
 
 export async function POST(req: NextRequest) {
     try {
+        // ─── Rate limit: 3 messages per IP per hour ──────────
+        const ip = getClientIp(req);
+        const { allowed, resetAt } = rateLimit(`contact:${ip}`, 3, 60 * 60 * 1000);
+        if (!allowed) {
+            const retryAfter = Math.ceil((resetAt - Date.now()) / 1000);
+            return NextResponse.json(
+                { error: "Too many messages. Please try again later." },
+                {
+                    status: 429,
+                    headers: { "Retry-After": String(retryAfter) },
+                }
+            );
+        }
+
         const body = await req.json();
         const { name, email, message } = body;
 

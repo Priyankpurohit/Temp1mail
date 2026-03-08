@@ -1,8 +1,9 @@
 "use client";
+import { Logo } from "@/components/Logo";
 
 import Link from "next/link";
 import { useState } from "react";
-import { Mail, ArrowLeft, Send, Loader2 } from "lucide-react";
+import { Mail, ArrowLeft, Send, Loader2, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Footer } from "@/components/Footer";
@@ -62,10 +63,7 @@ export default function ContactPage() {
                             <ArrowLeft className="h-5 w-5" />
                         </Button>
                     </Link>
-                    <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <Mail className="h-8 w-8 text-primary" />
-                        <span className="text-xl font-bold text-foreground">Temp1Mail</span>
-                    </Link>
+                    <Logo />
                 </div>
                 <ThemeToggle />
             </header>

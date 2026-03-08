@@ -12,13 +12,14 @@ const footerLinks = [
 
 export function Footer() {
     return (
-        <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/80 backdrop-blur-md">
+        <footer className="mt-auto border-t border-border bg-background/80 backdrop-blur-md">
             <div className="mx-auto max-w-5xl px-6 py-3">
                 <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                     {footerLinks.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
+                            prefetch={false}
                             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                         >
                             {link.label}

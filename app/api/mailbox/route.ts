@@ -2,31 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { generateEmailAddress, getExpirationDate, MAILBOX_LIFETIME_MINUTES } from "@/lib/mailbox";
 import { rateLimit, getClientIp } from "@/lib/rate-limit";
+import { triggerCleanup } from "@/lib/cleanup";
 
 const MAIL_DOMAIN = process.env.MAILGUN_DOMAIN || "temp1mail.com";
 
-/**
- * On-demand cleanup: delete up to 10 expired mailboxes.
- * Runs in the background after the response is sent.
- */
-async function cleanupExpired() {
-    try {
-        const expired = await prisma.mailbox.findMany({
-            where: { expiresAt: { lt: new Date() } },
-            select: { id: true },
-            take: 10,
-        });
 
-        if (expired.length > 0) {
-            await prisma.mailbox.deleteMany({
-                where: { id: { in: expired.map((m: { id: string }) => m.id) } },
-            });
-            console.log(`On-demand cleanup: deleted ${expired.length} expired mailboxes`);
-        }
-    } catch (err) {
-        console.error("On-demand cleanup error:", err);
-    }
-}
 
 /**
  * Increment the global stats counter for mailboxes created.
@@ -92,30 +72,58 @@ export async function POST(req: NextRequest) {
 
         const expiresAt = getExpirationDate(MAILBOX_LIFETIME_MINUTES);
 
-        // ─── Create mailbox FIRST (critical path) ───────────
-        const mailbox = await prisma.mailbox.upsert({
-            where: { address },
-            create: {
-                address,
-                expiresAt,
-            },
-            update: {},
-            include: {
-                emails: {
-                    orderBy: { receivedAt: "desc" },
-                    select: {
-                        id: true,
-                        fromAddr: true,
-                        fromName: true,
-                        subject: true,
-                        bodyHtml: true,
-                        bodyText: true,
-                        isRead: true,
-                        receivedAt: true,
-                    },
+        const emailInclude = {
+            emails: {
+                orderBy: { receivedAt: "desc" as const },
+                select: {
+                    id: true,
+                    fromAddr: true,
+                    fromName: true,
+                    subject: true,
+                    bodyHtml: true,
+                    bodyText: true,
+                    isRead: true,
+                    receivedAt: true,
                 },
             },
-        });
+        };
+
+        // ─── Create or find mailbox (handles race conditions) ───────────
+        let mailbox;
+        try {
+            mailbox = await prisma.mailbox.upsert({
+                where: { address },
+                create: {
+                    address,
+                    expiresAt,
+                },
+                update: {
+                    expiresAt,   // refresh expiry when re-opening
+                },
+                include: emailInclude,
+            });
+        } catch (upsertError: unknown) {
+            // Handle race condition: unique constraint violation (P2002)
+            const isPrismaUniqueError =
+                upsertError &&
+                typeof upsertError === "object" &&
+                "code" in upsertError &&
+                (upsertError as { code: string }).code === "P2002";
+
+            if (isPrismaUniqueError) {
+                // Another request created it first — just fetch it
+                const existing = await prisma.mailbox.findUnique({
+                    where: { address },
+                    include: emailInclude,
+                });
+                if (!existing) {
+                    throw new Error("Mailbox creation conflict — please try again");
+                }
+                mailbox = existing;
+            } else {
+                throw upsertError;
+            }
+        }
 
         // ─── Send response immediately ──────────────────────
         const response = NextResponse.json(
@@ -145,7 +153,7 @@ export async function POST(req: NextRequest) {
 
         // ─── Fire-and-forget AFTER building the response ────
         // These run in the background and don't block the response
-        cleanupExpired().catch(() => { });
+        triggerCleanup();
         trackMailboxCreated().catch(() => { });
 
         return response;

@@ -13,8 +13,8 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL("https://temp1mail.com"),
   title: {
-    default: "Temp1Mail - Free Temporary Email | Disposable Temp Mail No Signup",
-    template: "%s | Temp1Mail",
+    default: "Temp Mail - Disposable Temporary Email | Instant & No Signup",
+    template: "%s | Temp Mail",
   },
   description:
     "Free instant temporary email with no registration. Generate disposable temp mail to protect your privacy, block spam, and receive anonymous emails that auto-delete in 10 minutes.",
@@ -30,20 +30,20 @@ export const metadata: Metadata = {
     "fake email generator",
     "temp mail no signup",
   ],
-  authors: [{ name: "Temp1Mail", url: "https://temp1mail.com" }],
-  creator: "Temp1Mail",
-  publisher: "Temp1Mail",
+  authors: [{ name: "Temp Mail", url: "https://temp1mail.com" }],
+  creator: "Temp Mail",
+  publisher: "Temp Mail",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    title: "Temp1Mail - Free Temporary Email | Instant Disposable Temp Mail",
+    title: "Temp Mail - Free Temporary Email | Instant Disposable Temp Mail",
     description:
       "Get a free disposable email address instantly. No signup, total privacy. Generate temp mail, receive emails in real-time, auto-delete in 10 minutes.",
     url: "https://temp1mail.com",
-    siteName: "Temp1Mail",
+    siteName: "Temp Mail",
     locale: "en_US",
     type: "website",
     images: [
@@ -51,13 +51,13 @@ export const metadata: Metadata = {
         url: "https://temp1mail.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Temp1Mail - Free Disposable Temporary Email Service",
+        alt: "Temp Mail - Free Disposable Temporary Email Service",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Temp1Mail - Free Temporary Email | Disposable Temp Mail",
+    title: "Temp Mail - Free Temporary Email | Disposable Temp Mail",
     description:
       "Instant disposable email. No signup, no tracking, no spam. Generate free temp mail that auto-deletes in 10 minutes.",
     images: ["https://temp1mail.com/og-image.jpg"],
@@ -94,7 +94,7 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": "https://temp1mail.com/#website",
       url: "https://temp1mail.com",
-      name: "Temp1Mail",
+      name: "Temp Mail",
       description:
         "Free instant temporary email service. Generate disposable temp mail with no registration to protect your privacy.",
       publisher: { "@id": "https://temp1mail.com/#organization" },
@@ -107,14 +107,14 @@ const jsonLd = {
     {
       "@type": "Organization",
       "@id": "https://temp1mail.com/#organization",
-      name: "Temp1Mail",
+      name: "Temp Mail",
       url: "https://temp1mail.com",
       logo: "https://temp1mail.com/icon.svg",
     },
     {
       "@type": "WebApplication",
       "@id": "https://temp1mail.com/#app",
-      name: "Temp1Mail - Free Temporary Email",
+      name: "Temp Mail - Free Temporary Email",
       url: "https://temp1mail.com",
       description:
         "Generate free disposable temporary email addresses instantly. No signup, no tracking. Receive emails in real-time. Auto-delete after 10 minutes.",

@@ -1,6 +1,7 @@
+import { Logo } from "@/components/Logo";
 import { Metadata } from "next";
 import Link from "next/link";
-import { Mail, ArrowLeft } from "lucide-react";
+import { Mail, ArrowLeft, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Footer } from "@/components/Footer";
@@ -26,10 +27,7 @@ export default function TermsPage() {
                             <ArrowLeft className="h-5 w-5" />
                         </Button>
                     </Link>
-                    <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <Mail className="h-8 w-8 text-primary" />
-                        <span className="text-xl font-bold text-foreground">Temp1Mail</span>
-                    </Link>
+                    <Logo />
                 </div>
                 <ThemeToggle />
             </header>

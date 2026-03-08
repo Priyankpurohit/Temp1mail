@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { triggerCleanup } from "@/lib/cleanup";
 
 type RouteParams = { params: Promise<{ token: string }> };
 
@@ -46,6 +47,9 @@ export async function GET(_req: NextRequest, { params }: RouteParams) {
                 { status: 410 }
             );
         }
+
+        // Piggyback cleanup on inbox polling (throttled, fire-and-forget)
+        triggerCleanup();
 
         return NextResponse.json({
             id: mailbox.id,

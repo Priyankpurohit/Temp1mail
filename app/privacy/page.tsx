@@ -1,5 +1,6 @@
+import { Logo } from "@/components/Logo";
 import Link from "next/link";
-import { Mail, ArrowLeft } from "lucide-react";
+import { Mail, ArrowLeft, Zap } from "lucide-react";
 import { Footer } from "@/components/Footer";
 import type { Metadata } from "next";
 
@@ -20,13 +21,7 @@ export default function PrivacyPage() {
 
             {/* Header */}
             <header className="relative z-10 flex items-center justify-between px-6 py-4">
-                <Link
-                    href="/"
-                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-                >
-                    <Mail className="h-8 w-8 text-primary" />
-                    <span className="text-xl font-bold text-foreground">Temp1Mail</span>
-                </Link>
+                <Logo />
                 <Link
                     href="/"
                     className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"

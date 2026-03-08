@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   /* Performance: compress output */
   compress: true,
 
+
   /* Cache static assets aggressively */
   async headers() {
     return [
