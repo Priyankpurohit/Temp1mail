@@ -1,0 +1,1 @@
+require("dotenv").config({ path: ".env.local" }); const { PrismaClient } = require("@prisma/client"); const prisma = new PrismaClient(); prisma.mailbox.findFirst().then(console.log).catch(console.error);

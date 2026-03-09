@@ -204,7 +204,7 @@ function InboxContent() {
                 <ThemeToggle />
             </header>
 
-            <div className="relative z-10 mx-auto flex items-start w-full max-w-5xl gap-2 sm:gap-4 px-4 py-6 md:px-6 pb-20">
+            <div className="relative z-10 mx-auto flex flex-1 items-start w-full max-w-5xl gap-2 sm:gap-4 px-4 py-6 md:px-6 pb-20">
                 <Button variant="ghost" size="icon" onClick={() => router.back()} className="mt-2 sm:mt-3 shrink-0 h-10 w-10 sm:h-12 sm:w-12 rounded-full hover:bg-muted/50" title="Go back">
                     <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground hover:text-foreground transition-colors" />
                 </Button>
