@@ -107,7 +107,7 @@ const Index = () => {
           <div className="space-y-3">
             <FAQItem
               question="What is Temp1Mail?"
-              answer={<>Temp1Mail provides free, instant disposable email addresses. If you need something slightly different, you can also try an <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link>, a <Link href="/burner-email" className="text-primary hover:underline">burner email</Link>, or a <Link href="/choice-mail" className="text-primary hover:underline">choice mail</Link> to sign up for services without registration.</>}
+              answer={<>Temp1Mail provides free, instant disposable email addresses. If you need something slightly different, you can also try an <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link>, a <Link href="/burner-email" className="text-primary hover:underline">burner email</Link>, or a <Link href="/10-minute-mail" className="text-primary hover:underline">10 minute mail</Link> to sign up for services without registration.</>}
             />
             <FAQItem
               question="How long does a temporary email last?"
@@ -115,7 +115,7 @@ const Index = () => {
             />
             <FAQItem
               question="Do I need to sign up or register?"
-              answer={<>No! Just visit the site, type or generate an email address, and start receiving emails instantly. Zero registration, zero personal information required. Feel free to use our <Link href="/free-mail" className="text-primary hover:underline">free mail</Link> or <Link href="/generate-custom-mail" className="text-primary hover:underline">custom mail</Link> directly.</>}
+              answer={<>No! Just visit the site, type or generate an email address, and start receiving emails instantly. Zero registration, zero personal information required. Feel free to use our <Link href="/free-mail" className="text-primary hover:underline">free mail</Link> or <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link> directly.</>}
             />
             <FAQItem
               question="Can I receive attachments?"

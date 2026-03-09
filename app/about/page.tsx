@@ -35,36 +35,114 @@ export default function AboutPage() {
             {/* Content */}
             <main className="relative z-10 mx-auto max-w-3xl px-6 py-10 pb-24">
                 <div className="glass-card rounded-2xl p-8 md:p-10">
-                    <h1 className="mb-6 text-3xl font-bold text-foreground md:text-4xl">
-                        About Temp1Mail
+                    <h1 className="mb-6 flex items-center flex-wrap gap-2 text-2xl font-bold text-foreground md:text-3xl">
+                        About
+                        <span className="text-xl font-bold flex items-center text-foreground">
+                            Temp
+                            <Zap className="h-[1.5em] w-[1em] -mx-1 text-primary fill-primary scale-x-50 rotate-12" />
+                            Mail
+                        </span>
                     </h1>
 
                     <div className="space-y-4 text-muted-foreground leading-relaxed">
                         <p>
-                            <strong className="text-foreground">Temp1Mail</strong> is a free temporary email service
-                            designed for people who value their privacy. We provide instant, anonymous disposable email
-                            addresses. No signup, no registration, no personal information required.
+                            <strong className="text-foreground">Temp1Mail</strong> is a <Link href="/free-mail" className="text-primary hover:underline">free temporary email</Link> service
+                            designed to help you protect your online privacy and keep your
+                            primary inbox free from spam and unwanted solicitations. You can also use it as a <Link href="/temp-mail-generator" className="text-primary hover:underline">temp mail generator</Link>.
                         </p>
-
                         <p>
-                            In a world where every website asks for your email, protecting your real inbox matters.
-                            Whether you need a temp mail for a one-time verification, testing a new service, or
-                            avoiding spam, Temp1Mail has you covered.
+                            In today's digital world, your email address is often required for
+                            everything from signing up for new services to accessing free
+                            content. However, using your primary email for every online
+                            interaction can lead to a deluge of spam, unwanted marketing
+                            emails, and even potential security risks. Using a <Link href="/throwaway-email" className="text-primary hover:underline">throwaway email</Link> or <Link href="/burner-email" className="text-primary hover:underline">burner email</Link> is where Temp1Mail comes in.
                         </p>
-
                         <p>
-                            Every temporary email address you create is fully functional and ready to receive emails
-                            within seconds. Your disposable email inbox auto-deletes after 10 minutes, ensuring no
-                            trace of your activity remains. We don&apos;t store logs, we don&apos;t track users, and
-                            we don&apos;t sell data.
+                            We provide instant, <Link href="/disposable-mail" className="text-primary hover:underline">disposable email</Link> addresses that protect your
+                            privacy and keep your main inbox clean. Our service is completely
+                            free, requires no registration, and allows you to receive emails
+                            using an <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link> for a short period (acting like a <Link href="/10-minute-mail" className="text-primary hover:underline">10 minute mail</Link>) before they are automatically
+                            deleted.
                         </p>
-
                         <p>
-                            Temp1Mail is built with speed and simplicity at its core. Generate a free temp email in
-                            under one second, receive your messages instantly, and move on. No strings attached.
+                            Whether you're testing a new service, signing up for a one-time
+                            offer, or simply want to avoid giving out your real email,
+                            Temp1Mail offers a quick and secure <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link> solution.
+                        </p>
+                    </div>
+
+                    <h2 className="mb-1 mt-14 text-xl font-bold text-foreground md:text-2xl">
+                        How Temp1Mail Works
+                    </h2>
+                    <div className="space-y-4 text-muted-foreground leading-relaxed">
+                        <p>
+                            Using Temp1Mail is incredibly simple. When you visit our homepage,
+                            a unique, <Link href="/temp-email" className="text-primary hover:underline">temp email</Link> address is instantly generated for you.
+                            You can copy this address and use it wherever you need a <Link href="/temporary-mail" className="text-primary hover:underline">temporary mail</Link>.
+                        </p>
+                        <p>
+                            Any emails sent to your <Link href="/random-mail" className="text-primary hover:underline">random mail</Link> address will appear in your
+                            inbox on our website in real-time. You can view the content of
+                            these emails, including attachments (though we recommend caution
+                            with unknown attachments).
+                        </p>
+                        <p>
+                            Each <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link> address has a limited lifespan, typically a
+                            few hours, after which it and all associated emails are
+                            permanently deleted from our servers. This ensures your privacy
+                            and keeps our system efficient.
+                        </p>
+                    </div>
+
+                    <h2 className="mb-1 mt-14 text-xl font-bold text-foreground md:text-2xl">
+                        Our Mission
+                    </h2>
+                    <div className="space-y-4 text-muted-foreground leading-relaxed">
+                        <p>
+                            Our mission at Temp1Mail is to empower internet users with a simple
+                            yet powerful tool to protect their online privacy. We believe that
+                            everyone should have the right to control their personal
+                            information and avoid unsolicited communications.
+                        </p>
+                        <p>
+                            We are committed to providing a reliable, fast, and user-friendly
+                            service that helps you navigate the digital world with greater
+                            peace of mind.
+                        </p>
+                    </div>
+
+                    <h2 className="mb-1 mt-14 text-xl font-bold text-foreground md:text-2xl">
+                        Contact Us
+                    </h2>
+                    <div className="space-y-4 text-muted-foreground leading-relaxed">
+                        <p>
+                            If you have any questions, feedback, or suggestions, please don't
+                            hesitate to reach out to us.
+                        </p>
+                        <p className="flex items-center gap-2">
+                            <Mail className="h-5 w-5 text-primary" />
+                            <span>
+                                Email:{" "}
+                                <a
+                                    href="mailto:support@temp1mail.com"
+                                    className="text-primary hover:underline"
+                                >
+                                    support@temp1mail.com
+                                </a>
+                            </span>
+                        </p>
+                        <p className="flex items-center gap-2">
+                            <Zap className="h-5 w-5 text-primary" />
+                            <span>
+                                For quick support, you can also use our{" "}
+                                <Link href="/contact" className="text-primary hover:underline">
+                                    contact form
+                                </Link>
+                                .
+                            </span>
                         </p>
 
-                        <div className="pt-4">
+                        <div className="pt-6">
                             <Link href="/">
                                 <Button className="bg-gradient-to-r from-primary to-primary-glow text-primary-foreground font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
                                     Start using free temp mail now →
@@ -76,6 +154,6 @@ export default function AboutPage() {
             </main>
 
             <Footer />
-        </div>
+        </div >
     );
 }

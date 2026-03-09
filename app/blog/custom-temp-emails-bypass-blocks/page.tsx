@@ -46,19 +46,19 @@ export default function BlogPost4() {
                     <div className="prose-custom space-y-6 text-muted-foreground leading-relaxed">
 
                         <p>
-                            Public temporary email domains like <code className="text-xs bg-muted px-1.5 py-0.5 rounded">tempmail.com</code> or{" "}
+                            Public <Link href="/temporary-email" className="text-primary hover:opacity-80 transition-opacity">temporary email</Link> domains like <code className="text-xs bg-muted px-1.5 py-0.5 rounded">tempmail.com</code> or{" "}
                             <code className="text-xs bg-muted px-1.5 py-0.5 rounded">guerrillamail.com</code> are on nearly every website&apos;s
-                            blacklist. The moment you try to sign up with one, you get blocked. Custom disposable emails solve this problem completely.
+                            blacklist. The moment you try to sign up with one to protect your <Link href="/primary-email" className="text-primary hover:opacity-80 transition-opacity">primary email</Link>, you get blocked. Custom disposable emails solve this problem completely.
                         </p>
 
                         <h2 className="text-xl font-semibold text-foreground pt-2">
                             What Are Custom Disposable Emails?
                         </h2>
                         <p>
-                            A custom disposable email uses <strong className="text-foreground">your own personal domain</strong> tied to{" "}
+                            A custom <Link href="/disposable-mail" className="text-primary hover:opacity-80 transition-opacity">disposable email</Link> uses <strong className="text-foreground">your own personal domain</strong> tied to{" "}
                             <Link href="/" className="text-primary hover:opacity-80 transition-opacity">Temp1Mail</Link>.
                             Since the domain is yours alone and has no prior abuse history, websites have no reason to block it. You get all the
-                            benefits of temporary email (auto-delete, privacy, no registration) with the reliability of a clean domain.
+                            benefits of a <Link href="/temporary-mail" className="text-primary hover:opacity-80 transition-opacity">temporary mail</Link>, a <Link href="/burner-email" className="text-primary hover:opacity-80 transition-opacity">burner email</Link> or <Link href="/throwaway-email" className="text-primary hover:opacity-80 transition-opacity">throwaway email</Link> (auto-delete, privacy, no registration) with the reliability of a clean domain.
                         </p>
 
                         <h2 className="text-xl font-semibold text-foreground pt-2">
@@ -82,7 +82,7 @@ export default function BlogPost4() {
                             <li>
                                 <strong className="text-foreground">Start creating addresses</strong> like{" "}
                                 <code className="text-xs bg-muted px-1.5 py-0.5 rounded">anything@yourdomain.com</code> using{" "}
-                                <Link href="/generate-custom-mail" className="text-primary hover:opacity-80 transition-opacity">generate custom mail</Link>.
+                                <Link href="/custom-mail" className="text-primary hover:opacity-80 transition-opacity">generate custom mail</Link>.
                             </li>
                         </ol>
 
@@ -129,10 +129,10 @@ export default function BlogPost4() {
                         </h2>
 
                         <ul className="list-disc pl-5 space-y-2">
-                            <li><strong className="text-foreground">Testing apps and websites:</strong> QA teams need reliable email delivery without domain blocks.</li>
+                            <li><strong className="text-foreground">Testing apps and websites:</strong> QA teams need a reliable <Link href="/temp-mail-generator" className="text-primary hover:opacity-80 transition-opacity">temp mail generator</Link> without domain blocks.</li>
                             <li><strong className="text-foreground">Professional signups:</strong> Sites like LinkedIn or enterprise tools that actively block public temp mail domains.</li>
-                            <li><strong className="text-foreground">Anonymous forums:</strong> Protect your identity while participating in discussions.</li>
-                            <li><strong className="text-foreground">Repeated use:</strong> When you need a temp email you can rely on consistently over weeks.</li>
+                            <li><strong className="text-foreground">Anonymous forums:</strong> Protect your identity using an <Link href="/anonymous-email" className="text-primary hover:opacity-80 transition-opacity">anonymous email</Link> while participating in discussions.</li>
+                            <li><strong className="text-foreground">Repeated use:</strong> When you need a <Link href="/temp-email" className="text-primary hover:opacity-80 transition-opacity">temp email</Link> you can rely on consistently over weeks.</li>
                         </ul>
 
                         <div className="glass-card rounded-xl p-5 bg-primary/5 border-primary/20">
@@ -140,7 +140,7 @@ export default function BlogPost4() {
                                 <strong className="text-foreground">Quick rule of thumb:</strong> Use{" "}
                                 <Link href="/random-mail" className="text-primary hover:opacity-80 transition-opacity">random mail</Link>{" "}
                                 for quick, one-time signups. Use{" "}
-                                <Link href="/generate-custom-mail" className="text-primary hover:opacity-80 transition-opacity">custom mail</Link>{" "}
+                                <Link href="/custom-mail" className="text-primary hover:opacity-80 transition-opacity">custom mail</Link>{" "}
                                 when you need guaranteed delivery and zero blocks.
                             </p>
                         </div>

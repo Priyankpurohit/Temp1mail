@@ -47,7 +47,7 @@ export default function BlogPost3() {
 
                         <p>
                             In 2026, data breaches have exposed over <strong className="text-foreground">1 billion records</strong> worldwide.
-                            Your email address is the single most common piece of information leaked in these breaches. Temporary email
+                            Your <Link href="/primary-email" className="text-primary hover:opacity-80 transition-opacity">primary email</Link> address is the single most common piece of information leaked in these breaches. <Link href="/temporary-email" className="text-primary hover:opacity-80 transition-opacity">Temporary email</Link>
                             is no longer just a convenience; it is a critical privacy tool.
                         </p>
 
@@ -55,9 +55,9 @@ export default function BlogPost3() {
                             Reason 1: Ultimate Spam Protection
                         </h2>
                         <p>
-                            Every time you sign up for a new service, you risk being added to marketing lists that never stop sending.
+                            Every time you sign up for a new service, you risk being added to marketing lists that never stop sending if you use your <Link href="/primary-email" className="text-primary hover:opacity-80 transition-opacity">primary email</Link>.
                             With <Link href="/" className="text-primary hover:opacity-80 transition-opacity">Temp1Mail</Link>,
-                            your disposable email address is automatically deleted after 10 minutes. No more inbox overload, no more
+                            your <Link href="/disposable-mail" className="text-primary hover:opacity-80 transition-opacity">disposable email</Link> address is automatically deleted after 10 minutes, making it a powerful <Link href="/10-minute-mail" className="text-primary hover:opacity-80 transition-opacity">10 minute mail</Link> tool. No more inbox overload, no more
                             unsubscribe links that don&apos;t work.
                         </p>
 
@@ -76,7 +76,7 @@ export default function BlogPost3() {
                         </h2>
                         <p>
                             Need to verify an account but don&apos;t trust the website?{" "}
-                            <Link href="/generate-custom-mail" className="text-primary hover:opacity-80 transition-opacity">Generate a custom temp mail</Link>{" "}
+                            <Link href="/custom-mail" className="text-primary hover:opacity-80 transition-opacity">Generate a custom temp mail</Link>{" "}
                             address, complete the verification, and walk away. Your real email stays completely hidden from the service.
                         </p>
 
@@ -85,8 +85,8 @@ export default function BlogPost3() {
                         </h2>
                         <p>
                             Unlike Gmail, which scans your emails for ad targeting, or Yahoo, which has been involved in
-                            massive data breaches, Temp1Mail collects absolutely nothing. No logs, no IP addresses, no browsing
-                            history, no personal information. Read our{" "}
+                            massive data breaches, our <Link href="/temp-mail-generator" className="text-primary hover:opacity-80 transition-opacity">temp mail generator</Link> collects absolutely nothing. No logs, no IP addresses, no browsing
+                            history, no personal information. Use it fully as an <Link href="/anonymous-email" className="text-primary hover:opacity-80 transition-opacity">anonymous email</Link>. Read our{" "}
                             <Link href="/privacy" className="text-primary hover:opacity-80 transition-opacity">Privacy Policy</Link>{" "}
                             for the full details.
                         </p>

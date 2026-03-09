@@ -41,48 +41,21 @@ export default function DisclaimerPage() {
                 </p>
 
                 <div className="glass-card rounded-xl p-8 space-y-8 text-sm leading-relaxed text-muted-foreground">
-                    <section>
-                        <h2 className="mb-3 text-lg font-semibold text-foreground">
-                            General Disclaimer
-                        </h2>
-                        <p>
-                            Temp1Mail provides temporary, disposable email addresses for short-term use. The service is offered on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis without warranties of any kind, either express or implied.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="mb-3 text-lg font-semibold text-foreground">
-                            No Guarantee of Delivery
-                        </h2>
-                        <p>
-                            We do not guarantee that every email sent to a temporary address will be delivered. Emails may be delayed, filtered, or lost due to factors beyond our control. Do not use Temp1Mail for critical communications.
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2 className="mb-3 text-lg font-semibold text-foreground">
-                            Temporary Nature of Data
-                        </h2>
-                        <p>
-                            All mailboxes and their contents are automatically deleted after 10 minutes. Once deleted, data cannot be recovered. You are solely responsible for saving any information you need before it expires.
-                        </p>
-                    </section>
-
-                    <section>
+                    <section className="mb-8">
                         <h2 className="mb-3 text-lg font-semibold text-foreground">
                             Prohibited Use
                         </h2>
                         <p>
-                            You may not use Temp1Mail for illegal activities, harassment, distribution of malware, phishing, or any purpose that violates applicable laws. We reserve the right to block addresses or domains used for abuse.
+                            You may not use Temp1Mail's <Link href="/temporary-mail" className="text-primary hover:underline">temporary mail</Link> or <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link> services for illegal activities, harassment, distribution of malware, phishing, or any purpose that violates applicable laws. We reserve the right to block <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link> addresses or domains used for abuse.
                         </p>
                     </section>
 
-                    <section>
+                    <section className="mb-8">
                         <h2 className="mb-3 text-lg font-semibold text-foreground">
                             Limitation of Liability
                         </h2>
                         <p>
-                            Temp1Mail and its operators shall not be liable for any direct, indirect, incidental, or consequential damages arising from the use or inability to use this service.
+                            Temp1Mail and its operators shall not be liable for any direct, indirect, incidental, or consequential damages arising from the use or inability to use this <Link href="/free-mail" className="text-primary hover:underline">free mail</Link> service, including our <Link href="/random-mail" className="text-primary hover:underline">random mail</Link> or <Link href="/temp-email" className="text-primary hover:underline">temp email</Link> addresses. We recommend not using it for important accounts where a <Link href="/primary-email" className="text-primary hover:underline">primary email</Link> is required.
                         </p>
                     </section>
 
@@ -98,6 +71,6 @@ export default function DisclaimerPage() {
             </main>
 
             <Footer />
-        </div>
+        </div >
     );
 }

@@ -1,0 +1,98 @@
+﻿
+> temp1mail@0.1.0 build
+> prisma generate && next build
+
+Prisma schema loaded from prisma\schema.prisma
+
+Γ£ö Generated Prisma Client (v6.19.2) to .\node_modules\@prisma\client in 1.52s
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 39.6s
+  Running TypeScript ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/37) ...
+  Generating static pages using 7 workers (9/37) 
+  Generating static pages using 7 workers (18/37) 
+  Generating static pages using 7 workers (27/37) 
+Γ£ô Generating static pages using 7 workers (37/37) in 6.1s
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ Γùï /10-minute-mail
+Γö£ Γùï /about
+Γö£ Γùï /anonymous-email
+Γö£ ╞Æ /api/cleanup
+Γö£ ╞Æ /api/contact
+Γö£ ╞Æ /api/mailbox
+Γö£ ╞Æ /api/mailbox/[token]
+Γö£ ╞Æ /api/mailbox/[token]/emails/[emailId]
+Γö£ ╞Æ /api/mailbox/[token]/stream
+Γö£ ╞Æ /api/stats
+Γö£ ╞Æ /api/webhook/mailgun
+Γö£ ╞Æ /api/webhook/mailgun/health
+Γö£ Γùï /blog
+Γö£ Γùï /blog/best-temporary-email-services-2026
+Γö£ Γùï /blog/custom-temp-emails-bypass-blocks
+Γö£ Γùï /blog/disposable-email-safe-signups-guide
+Γö£ Γùï /blog/top-5-reasons-temporary-email-privacy
+Γö£ Γùï /burner-email
+Γö£ Γùï /contact
+Γö£ Γùï /custom-mail
+Γö£ Γùï /disclaimer
+Γö£ Γùï /disposable-mail
+Γö£ Γùï /fake-mail
+Γö£ Γùï /faq
+Γö£ Γùï /free-mail
+Γö£ Γùï /icon.svg
+Γö£ Γùï /inbox
+Γö£ ╞Æ /inbox/[id]
+Γö£ Γùï /privacy
+Γö£ Γùï /random-mail
+Γö£ Γùï /temp-email
+Γö£ Γùï /temp-mail-free
+Γö£ Γùï /temp-mail-generator
+Γö£ Γùï /tempemail
+Γö£ Γùï /temporary-email
+Γö£ Γùï /temporary-mail
+Γö£ Γùï /terms
+Γöö Γùï /throwaway-email
+
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+
+
+> temp1mail@0.1.0 postbuild
+> next-sitemap
+
+Γ£¿ [next-sitemap] Loading next-sitemap config: file:///E:/Antigravity/Temp1mail/next-sitemap.config.js
+Γ£à [next-sitemap] Generation completed
+ΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö¼ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ
+Γöé (index)       Γöé Values Γöé
+Γö£ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö╝ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöñ
+Γöé indexSitemaps Γöé 1      Γöé
+Γöé sitemaps      Γöé 1      Γöé
+ΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ
+-----------------------------------------------------
+ SITEMAP INDICES 
+-----------------------------------------------------
+
+   Γùï https://temp1mail.com/sitemap.xml
+
+
+-----------------------------------------------------
+ SITEMAPS 
+-----------------------------------------------------
+
+   Γùï https://temp1mail.com/sitemap-0.xml
+
+

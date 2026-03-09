@@ -4,18 +4,19 @@ const path = require('path');
 const pages = [
     { dir: 'anonymous-email', keyword: 'Anonymous Email', short: 'anonymous email' },
     { dir: 'burner-email', keyword: 'Burner Email', short: 'burner email' },
-    { dir: 'choice-mail', keyword: 'Choice Mail', short: 'choice mail' },
+    { dir: '10-minute-mail', keyword: '10 Minute Mail', short: '10 minute mail' },
     { dir: 'custom-mail', keyword: 'Custom Mail', short: 'custom mail' },
     { dir: 'disposable-mail', keyword: 'Disposable Mail', short: 'disposable mail' },
     { dir: 'fake-mail', keyword: 'Fake Mail', short: 'fake mail' },
     { dir: 'free-mail', keyword: 'Free Mail', short: 'free mail' },
-    { dir: 'generate-custom-mail', keyword: 'Generate Custom Mail', short: 'custom mail' },
     { dir: 'random-mail', keyword: 'Random Mail', short: 'random mail' },
     { dir: 'temp-email', keyword: 'Temp Email', short: 'temp email' },
     { dir: 'temp-mail-free', keyword: 'Temp Mail Free', short: 'free temp mail' },
-    { dir: 'tempemail', keyword: 'Tempemail', short: 'temp email' },
+    { dir: 'tempEmail', keyword: 'Temp Email', short: 'temp email' },
     { dir: 'temporary-email', keyword: 'Temporary Email', short: 'temporary email' },
-    { dir: 'temporary-mail', keyword: 'Temporary Mail', short: 'temporary mail' }
+    { dir: 'temporary-mail', keyword: 'Temporary Mail', short: 'temporary mail' },
+    { dir: 'throwaway-email', keyword: 'Throwaway Email', short: 'throwaway email' },
+    { dir: 'temp-mail-generator', keyword: 'Temp Mail Generator', short: 'temp mail generator' }
 ];
 
 for (let i = 0; i < pages.length; i++) {
@@ -36,7 +37,7 @@ for (let i = 0; i < pages.length; i++) {
     }
     const CTA = 'Create ' + ctaContent.split(' ').slice(0, 2).join(' ');
 
-    let componentName = page.keyword.replace(/\s+/g, '') + 'Page';
+    let componentName = page.keyword.replace(/\s+/g, '').replace(/^10/, "Ten") + 'Page';
 
     let newContent = `import { LandingPageTemplate } from "@/components/LandingPageTemplate";
 import Link from "next/link";

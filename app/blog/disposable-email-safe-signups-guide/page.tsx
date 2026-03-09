@@ -46,9 +46,9 @@ export default function BlogPost2() {
                     <div className="prose-custom space-y-6 text-muted-foreground leading-relaxed">
 
                         <p>
-                            Many websites now require email verification before you can access their content or services.
-                            The problem? Handing over your real email means spam, marketing emails, and potential data breaches.
-                            Using a <strong className="text-foreground">disposable email</strong> for signups lets you get the verification
+                            Many websites now require email verification before you can access their content or services, which is why a <Link href="/temporary-email" className="text-primary hover:opacity-80 transition-opacity">temporary email</Link> is essential.
+                            The problem? Handing over your <Link href="/primary-email" className="text-primary hover:opacity-80 transition-opacity">primary email</Link> means spam, marketing emails, and potential data breaches.
+                            Using a <Link href="/throwaway-email" className="text-primary hover:opacity-80 transition-opacity">throwaway email</Link> or <strong className="text-foreground">disposable email</strong> for signups lets you get the verification
                             code you need without any of the risks.
                         </p>
 
@@ -86,7 +86,7 @@ export default function BlogPost2() {
                                 <h3 className="text-lg font-medium text-foreground">Public Domain Blocks</h3>
                                 <p>
                                     Some websites maintain blacklists of known temp mail domains. The solution? Use{" "}
-                                    <Link href="/generate-custom-mail" className="text-primary hover:opacity-80 transition-opacity">generate custom mail</Link>{" "}
+                                    <Link href="/custom-mail" className="text-primary hover:opacity-80 transition-opacity">generate custom mail</Link>{" "}
                                     with a private domain. You can buy a domain for as little as $2-9/year and connect it to Temp1Mail.
                                 </p>
                             </div>
@@ -109,10 +109,10 @@ export default function BlogPost2() {
                         </h2>
 
                         <ul className="list-disc pl-5 space-y-2">
-                            <li><strong className="text-foreground">Spam-free:</strong> Block unwanted newsletters instantly. Once the inbox expires, so does all the junk.</li>
-                            <li><strong className="text-foreground">Anonymous:</strong> No tracking pixels can link back to your real identity.</li>
+                            <li><strong className="text-foreground">Spam-free:</strong> Block unwanted newsletters instantly. Once the <Link href="/burner-email" className="text-primary hover:opacity-80 transition-opacity">burner email</Link> inbox expires, so does all the junk.</li>
+                            <li><strong className="text-foreground">Anonymous:</strong> No tracking pixels can link back to your real identity. Use an <Link href="/anonymous-email" className="text-primary hover:opacity-80 transition-opacity">anonymous email</Link>.</li>
                             <li><strong className="text-foreground">Fast:</strong> Inbox refreshes automatically. Verification codes arrive in under 5 seconds.</li>
-                            <li><strong className="text-foreground">No account needed:</strong> Zero registration, zero personal information required.</li>
+                            <li><strong className="text-foreground">No account needed:</strong> Zero registration, zero personal information required to use this <Link href="/free-mail" className="text-primary hover:opacity-80 transition-opacity">free mail</Link> tool.</li>
                         </ul>
 
                         <div className="glass-card rounded-xl p-5 bg-primary/5 border-primary/20">

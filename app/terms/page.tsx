@@ -47,16 +47,16 @@ export default function TermsPage() {
                         <section>
                             <h2 className="mb-2 text-lg font-semibold text-foreground">1. Acceptance of Terms</h2>
                             <p>
-                                By using Temp1Mail, you agree to these Terms of Service. If you do not agree,
-                                please do not use our service. We may update these terms at any time without notice.
+                                By using Temp1Mail's <Link href="/temp-email" className="text-primary hover:underline">temp email</Link> and <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link> services, you agree to these Terms of Service. If you do not agree,
+                                please do not use our <Link href="/free-mail" className="text-primary hover:underline">free mail</Link> service. We may update these terms at any time without notice.
                             </p>
                         </section>
 
                         <section>
                             <h2 className="mb-2 text-lg font-semibold text-foreground">2. Service Description</h2>
                             <p>
-                                Temp1Mail provides free, temporary disposable email addresses. Emails and mailboxes
-                                are automatically deleted after 10 minutes. We do not guarantee message delivery,
+                                Temp1Mail provides free, <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link> and <Link href="/disposable-mail" className="text-primary hover:underline">disposable email</Link> addresses like our <Link href="/temp-mail-generator" className="text-primary hover:underline">temp mail generator</Link>. Emails and mailboxes
+                                are automatically deleted after 10 minutes (acting as a secure <Link href="/10-minute-mail" className="text-primary hover:underline">10 minute mail</Link>). We do not guarantee message delivery,
                                 uptime, or availability.
                             </p>
                         </section>
@@ -95,8 +95,8 @@ export default function TermsPage() {
                         <section>
                             <h2 className="mb-2 text-lg font-semibold text-foreground">6. Privacy</h2>
                             <p>
-                                We do not require registration or collect personal information. Temporary
-                                mailboxes and their contents are automatically deleted after expiration.
+                                We do not require registration or collect personal information. <Link href="/temporary-mail" className="text-primary hover:underline">Temporary mail</Link> or <Link href="/burner-email" className="text-primary hover:underline">burner email</Link>
+                                mailboxes and their contents are automatically deleted after expiration to protect your <Link href="/primary-email" className="text-primary hover:underline">primary email</Link> identity.
                                 For more details, see our{" "}
                                 <Link href="/privacy" className="text-primary hover:opacity-80 transition-opacity">
                                     Privacy Policy

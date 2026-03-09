@@ -41,37 +41,35 @@ export default function PrivacyPage() {
                 </p>
 
                 <div className="glass-card rounded-xl p-8 space-y-8 text-sm leading-relaxed text-muted-foreground">
-                    <section>
+
+                    <section className="mb-8">
                         <h2 className="mb-3 text-lg font-semibold text-foreground">
-                            1. Information We Collect
+                            1. Data Collection &amp; Storage
                         </h2>
                         <p>
-                            Temp1Mail is designed to be privacy-first. We do <strong className="text-foreground">not</strong> require any personal information to use our service. No registration, no name, no phone number.
-                        </p>
-                        <p className="mt-2">
-                            Temporary mailboxes are created on-the-fly and are automatically destroyed after 10 minutes along with all received emails.
+                            When you create a <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link> address or use our <Link href="/temp-mail-generator" className="text-primary hover:underline">temp mail generator</Link>, we store the address itself and any emails received by it. We do not collect any personal information about you to protect your <Link href="/primary-email" className="text-primary hover:underline">primary email</Link> identity (e.g., IP address, browser details).
                         </p>
                     </section>
 
-                    <section>
+                    <section className="mb-8">
                         <h2 className="mb-3 text-lg font-semibold text-foreground">
-                            2. How We Use Data
+                            2. Data Deletion
                         </h2>
                         <p>
-                            Any email received by a temporary mailbox is stored solely for the purpose of displaying it to the mailbox holder. We do not read, analyze, sell, or share email content with third parties.
+                            All <Link href="/throwaway-email" className="text-primary hover:underline">throwaway email</Link> and <Link href="/disposable-mail" className="text-primary hover:underline">disposable email</Link> addresses and their associated emails are automatically and permanently deleted after 10 minutes (acting like a secure <Link href="/10-minute-mail" className="text-primary hover:underline">10 minute mail</Link>). There is no way to recover them once deleted, ensuring a true <Link href="/burner-email" className="text-primary hover:underline">burner email</Link> experience.
                         </p>
                     </section>
 
-                    <section>
+                    <section className="mb-8">
                         <h2 className="mb-3 text-lg font-semibold text-foreground">
-                            3. Data Retention
+                            3. Data Security
                         </h2>
                         <p>
-                            All mailbox data (including email addresses, messages, and attachments) is permanently deleted after the mailbox expires (10 minutes from creation). We do not maintain backups of expired mailboxes.
+                            We implement standard security measures to protect the data we store. However, as with any online service, we cannot guarantee absolute security. Please do not use Temp1Mail for sensitive or confidential communications.
                         </p>
                     </section>
 
-                    <section>
+                    <section className="mb-8">
                         <h2 className="mb-3 text-lg font-semibold text-foreground">
                             4. Cookies &amp; Analytics
                         </h2>
@@ -80,7 +78,7 @@ export default function PrivacyPage() {
                         </p>
                     </section>
 
-                    <section>
+                    <section className="mb-8">
                         <h2 className="mb-3 text-lg font-semibold text-foreground">
                             5. Third-Party Services
                         </h2>
@@ -89,7 +87,7 @@ export default function PrivacyPage() {
                         </p>
                     </section>
 
-                    <section>
+                    <section className="mb-8">
                         <h2 className="mb-3 text-lg font-semibold text-foreground">
                             6. Changes to This Policy
                         </h2>
@@ -114,6 +112,6 @@ export default function PrivacyPage() {
             </main>
 
             <Footer />
-        </div>
+        </div >
     );
 }

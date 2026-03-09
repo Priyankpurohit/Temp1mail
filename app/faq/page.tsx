@@ -76,13 +76,13 @@ export default function FAQPage() {
                         {/* Q1 */}
                         <FAQAccordion question="What is a temporary / disposable email?">
                             <p>
-                                A <strong className="text-foreground">temporary email</strong> (also called disposable email or temp mail)
+                                A <strong className="text-foreground">temporary email</strong> (also called <Link href="/disposable-mail" className="text-primary hover:opacity-80 transition-opacity">disposable email</Link> or <Link href="/temp-email" className="text-primary hover:opacity-80 transition-opacity">temp mail</Link>)
                                 is a short-lived email address you can use without signing up or providing personal information.
                                 It&apos;s perfect for situations where you need an email address but don&apos;t want to use your real one.
                             </p>
                             <p>
                                 With <Link href="/" className="text-primary hover:opacity-80 transition-opacity">Temp1Mail</Link>,
-                                you can instantly create a free temp email that auto-deletes after 10 minutes, keeping your
+                                you can instantly create a <Link href="/free-mail" className="text-primary hover:opacity-80 transition-opacity">free temp email</Link> that auto-deletes after 10 minutes (just like a <Link href="/10-minute-mail" className="text-primary hover:opacity-80 transition-opacity">10 minute mail</Link>), keeping your
                                 real inbox clean and your identity anonymous.
                             </p>
                         </FAQAccordion>
@@ -108,11 +108,11 @@ export default function FAQPage() {
                                 Yes! Temp1Mail is <strong className="text-foreground">100% free</strong> with no registration,
                                 no signup, and no personal information required. Just visit{" "}
                                 <Link href="/" className="text-primary hover:opacity-80 transition-opacity">temp1mail.com</Link>,
-                                create your anonymous email address, and start receiving emails immediately.
+                                create your <Link href="/anonymous-email" className="text-primary hover:opacity-80 transition-opacity">anonymous email</Link> address, and start receiving emails immediately.
                             </p>
                             <p>
-                                There are no hidden fees, no premium tiers, and no limits on how many temporary
-                                email addresses you can create.
+                                There are no hidden fees, no premium tiers, and no limits on how many <Link href="/temporary-email" className="text-primary hover:opacity-80 transition-opacity">temporary
+                                    email</Link> addresses you can create.
                             </p>
                         </FAQAccordion>
 
@@ -126,7 +126,7 @@ export default function FAQPage() {
                             <p>
                                 This auto-delete feature ensures your privacy is protected. Need a fresh address?
                                 Simply{" "}
-                                <Link href="/generate-custom-mail" className="text-primary hover:opacity-80 transition-opacity">generate a new custom mail</Link>{" "}
+                                <Link href="/custom-mail" className="text-primary hover:opacity-80 transition-opacity">generate a new custom mail</Link>{" "}
                                 or use our{" "}
                                 <Link href="/random-mail" className="text-primary hover:opacity-80 transition-opacity">random mail generator</Link>.
                             </p>
@@ -188,7 +188,7 @@ export default function FAQPage() {
                             </ul>
                             <p>
                                 Instead of handing out your personal email everywhere,{" "}
-                                <Link href="/generate-custom-mail" className="text-primary hover:opacity-80 transition-opacity">generate a custom temp mail</Link>{" "}
+                                <Link href="/custom-mail" className="text-primary hover:opacity-80 transition-opacity">generate a custom temp mail</Link>{" "}
                                 on Temp1Mail and keep your real inbox clean and secure.
                             </p>
                         </FAQAccordion>
@@ -233,7 +233,7 @@ export default function FAQPage() {
                             <ul className="list-disc pl-5 space-y-1">
                                 <li>
                                     <strong className="text-foreground">Custom email:</strong> Type any username you like on the{" "}
-                                    <Link href="/generate-custom-mail" className="text-primary hover:opacity-80 transition-opacity">custom mail generator</Link>{" "}
+                                    <Link href="/custom-mail" className="text-primary hover:opacity-80 transition-opacity">custom mail generator</Link>{" "}
                                     , for example, <code className="text-xs bg-muted px-1 py-0.5 rounded">myname@temp1mail.com</code>
                                 </li>
                                 <li>

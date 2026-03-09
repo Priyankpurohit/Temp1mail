@@ -79,10 +79,10 @@ export function EmailGeneratorCard({ ctaText = "Create Inbox", defaultMode = "cu
                             value={username}
                             onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, ""))}
                             placeholder="Type the email"
-                            className="flex-1 bg-transparent px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none"
+                            className="flex-1 min-w-0 bg-transparent pl-4 pr-1 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none"
                             maxLength={12}
                         />
-                        <span className="shrink-0 pr-4 text-sm text-muted-foreground font-medium">
+                        <span className="shrink-0 pr-4 text-sm text-muted-foreground font-medium truncate">
                             @{MAIL_DOMAIN}
                         </span>
                     </div>

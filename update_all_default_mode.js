@@ -4,18 +4,19 @@ const path = require('path');
 const pages = [
     'anonymous-email',
     'burner-email',
-    'choice-mail',
+    '10-minute-mail',
     'custom-mail',
     'disposable-mail',
     'fake-mail',
     'free-mail',
-    'generate-custom-mail',
     'random-mail',
     'temp-email',
     'temp-mail-free',
     'tempemail',
     'temporary-email',
-    'temporary-mail'
+    'temporary-mail',
+    'throwaway-email',
+    'temp-mail-generator'
 ];
 
 for (const dir of pages) {

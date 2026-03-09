@@ -6,18 +6,19 @@ const path = require('path');
 const pageSubheadings = {
     'anonymous-email': 'Anonymous • Private • Secure',    // 28 chars
     'burner-email': 'Burner • Fast • Disposable',         // 26 chars
-    'choice-mail': 'Choice • Custom • Secure',            // 24 chars
+    '10-minute-mail': 'Fast • Temporary  • Secure',            // 20 chars
     'custom-mail': 'Custom • Personal • Secure',          // 26 chars
     'disposable-mail': 'Disposable • Fast • Secure',      // 26 chars
     'fake-mail': 'Fake • Throwaway • Secure',             // 25 chars
     'free-mail': 'Free • Instant • Secure',               // 23 chars
-    'generate-custom-mail': 'Custom • Fast • Secure',     // 22 chars
     'random-mail': 'Random • Instant • Free',             // 23 chars
     'temp-email': 'Temp • Disposable • Fast',             // 24 chars
     'temp-mail-free': 'Free • Temp • Instant',            // 21 chars
     'tempEmail': 'Temp • Fast • Secure',                  // 20 chars
     'temporary-email': 'Temporary • Fast • Secure',       // 25 chars
-    'temporary-mail': 'Temporary • Quick • Private'       // 27 chars
+    'temporary-mail': 'Temporary • Quick • Private',       // 27 chars
+    'throwaway-email': 'Throwaway • Fast • Secure',
+    'temp-mail-generator': 'Fast • Temporary • Secure'
 };
 
 for (const [dir, subheading] of Object.entries(pageSubheadings)) {
