@@ -35,11 +35,11 @@ export default function AboutPage() {
             {/* Content */}
             <main className="relative z-10 mx-auto max-w-3xl px-6 py-10 pb-24">
                 <div className="glass-card rounded-2xl p-8 md:p-10">
-                    <h1 className="mb-6 flex items-center flex-wrap gap-2 text-2xl font-bold text-foreground md:text-3xl">
+                    <h1 className="mb-6 flex items-center flex-wrap gap-2 text-xl font-bold text-foreground">
                         About
-                        <span className="text-xl font-bold flex items-center text-foreground">
+                        <span className="flex items-center text-foreground">
                             Temp
-                            <Zap className="h-[1.5em] w-[1em] -mx-1 text-primary fill-primary scale-x-50 rotate-12" />
+                            <Zap className="h-[2em] w-[1.2em] -mx-1 text-primary fill-primary scale-x-50 rotate-12" />
                             Mail
                         </span>
                     </h1>
@@ -71,7 +71,7 @@ export default function AboutPage() {
                         </p>
                     </div>
 
-                    <h2 className="mb-1 mt-14 text-xl font-bold text-foreground md:text-2xl">
+                    <h2 className="mb-1 mt-14 text-xl font-bold text-foreground">
                         How Temp1Mail Works
                     </h2>
                     <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -94,7 +94,7 @@ export default function AboutPage() {
                         </p>
                     </div>
 
-                    <h2 className="mb-1 mt-14 text-xl font-bold text-foreground md:text-2xl">
+                    <h2 className="mb-1 mt-14 text-xl font-bold text-foreground">
                         Our Mission
                     </h2>
                     <div className="space-y-4 text-muted-foreground leading-relaxed">
@@ -111,7 +111,7 @@ export default function AboutPage() {
                         </p>
                     </div>
 
-                    <h2 className="mb-1 mt-14 text-xl font-bold text-foreground md:text-2xl">
+                    <h2 className="mb-1 mt-14 text-xl font-bold text-foreground">
                         Contact Us
                     </h2>
                     <div className="space-y-4 text-muted-foreground leading-relaxed">
