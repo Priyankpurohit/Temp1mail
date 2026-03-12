@@ -3,8 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* Performance: compress output */
   compress: true,
-
-
+  experimental: {
+    optimizeCss: true,
+  },
   /* Cache static assets aggressively */
   async headers() {
     return [

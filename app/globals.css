@@ -93,6 +93,14 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
+/* Force layout scaling for screens smaller than 420px, shrinking font sizes proportionally and preserving the 420px wide layout aspect ratio */
+@media (max-width: 420px) {
+  html {
+    /* 420px / 16px = 26.25 rem. This forces the viewport width to always equal 26.25 rem. */
+    font-size: calc(100vw / 26.25) !important;
+  }
+}
+
 button,
 [role="button"],
 a,
