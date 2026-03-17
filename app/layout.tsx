@@ -172,6 +172,13 @@ export default function RootLayout({
             gtag('config', 'G-2R46QD65F3');
           `}
         </Script>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5486930886029492"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
       </body>
     </html>
   );
