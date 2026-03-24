@@ -23,6 +23,7 @@ import { ReactNode } from "react";
 export interface LandingFAQ {
     question: string;
     answer: ReactNode;
+    schemaAnswer?: string;
 }
 
 export interface LandingPageProps {

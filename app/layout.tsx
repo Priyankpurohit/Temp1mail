@@ -12,6 +12,7 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://temp1mail.com"),
+  applicationName: "Temp Mail",
   title: {
     default: "Temp Mail - Disposable Temporary Email | Instant & No Signup",
     template: "%s | Temp Mail",
