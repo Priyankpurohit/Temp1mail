@@ -138,6 +138,7 @@ const jsonLd = {
   ],
 };
 
+// forced HMR tweak
 export default function RootLayout({
   children,
 }: Readonly<{

@@ -5,7 +5,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Copy, Check, Mail, RefreshCw, Trash2, Zap } from "lucide-react";
+import { ArrowLeft, Copy, Check, Mail, RefreshCw, Trash2, Zap, Clock, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -169,31 +169,58 @@ export default function InboxPage() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass-card rounded-xl p-4"
+            className="glass-card rounded-xl p-5"
           >
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-muted-foreground mb-1">Your temporary email</p>
-                <p className="truncate font-mono text-sm font-semibold text-foreground">
-                  {mailbox?.address || "Loading..."}
-                </p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-1">Your temporary email</p>
+                <div className="flex items-center gap-3 bg-background/50 p-2 rounded-lg border border-border">
+                  <p className="truncate font-mono text-base md:text-lg font-bold text-foreground pl-2">
+                    {mailbox?.address || "Loading..."}
+                  </p>
+                  <Button variant="default" size="sm" onClick={handleCopy} className="shrink-0 ml-auto" title="Copy email address">
+                    {copied ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
+                    Copy Email
+                  </Button>
+                </div>
               </div>
-              <Button variant="ghost" size="icon" onClick={handleDelete} className="shrink-0" title="Delete mailbox">
-                <Trash2 className="h-4 w-4 text-muted-foreground hover:text-destructive transition-colors" />
-              </Button>
-              <Button variant="ghost" size="icon" onClick={handleCopy} className="shrink-0">
-                {copied ? <Check className="h-4 w-4 text-accent-foreground" /> : <Copy className="h-4 w-4 text-muted-foreground" />}
-              </Button>
+              <div className="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
+                <Link href="/">
+                    <Button variant="outline" size="sm" className="shrink-0 group">
+                      <RefreshCw className="mr-2 h-4 w-4 group-hover:rotate-180 transition-transform duration-500" />
+                      Regenerate
+                    </Button>
+                </Link>
+                <Button variant="ghost" size="sm" onClick={handleDelete} className="shrink-0 text-muted-foreground hover:text-destructive transition-colors">
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Delete Now
+                </Button>
+              </div>
             </div>
-            {mailbox && (
-              <CountdownTimer expiresAt={new Date(mailbox.expiresAt)} className="mt-3" />
-            )}
+            
+            <div className="mt-4 pt-4 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              {mailbox && (
+                <div className="flex-1 w-full max-w-sm">
+                   <p className="text-xs text-muted-foreground mb-1 flex items-center gap-1 font-medium"><Clock className="h-3 w-3"/> Inbox auto-clears in:</p>
+                   <CountdownTimer expiresAt={new Date(mailbox.expiresAt)} className="" />
+                </div>
+              )}
+              <div className="flex items-center gap-2 text-xs font-medium text-amber-500/80 bg-amber-500/10 px-3 py-1.5 rounded-full">
+                <Shield className="h-3.5 w-3.5" />
+                Messages auto-delete
+              </div>
+            </div>
           </motion.div>
 
           {/* Refresh indicator */}
-          <div className="flex items-center gap-2 text-xs text-muted-foreground px-1">
-            <RefreshCw className="h-3 w-3 animate-spin" />
-            Auto-refreshing
+          <div className="flex items-center justify-between px-1">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <RefreshCw className="h-3 w-3 animate-spin" />
+              Auto-refreshing inbox
+            </div>
+            <div className="text-xs text-muted-foreground">
+              Drop emails here
+            </div>
           </div>
 
           {/* Email list */}

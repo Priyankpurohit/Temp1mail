@@ -1,51 +1,34 @@
 const fs = require('fs');
 const path = require('path');
 
-const pages = [
-    { dir: 'anonymous-email', keyword: 'Anonymous Email', short: 'anonymous email' },
-    { dir: 'burner-email', keyword: 'Burner Email', short: 'burner email' },
-    { dir: '10-minute-mail', keyword: '10 Minute Mail', short: '10 minute mail' },
-    { dir: 'custom-mail', keyword: 'Custom Mail', short: 'custom mail' },
-    { dir: 'disposable-mail', keyword: 'Disposable Mail', short: 'disposable mail' },
-    { dir: 'fake-mail', keyword: 'Fake Mail', short: 'fake mail' },
-    { dir: 'free-mail', keyword: 'Free Mail', short: 'free mail' },
-    { dir: 'random-mail', keyword: 'Random Mail', short: 'random mail' },
-    { dir: 'temp-email', keyword: 'Temp Email', short: 'temp email' },
-    { dir: 'temp-mail-free', keyword: 'Temp Mail Free', short: 'free temp mail' },
-    { dir: 'tempEmail', keyword: 'Temp Email', short: 'temp email' },
-    { dir: 'temporary-email', keyword: 'Temporary Email', short: 'temporary email' },
-    { dir: 'temporary-mail', keyword: 'Temporary Mail', short: 'temporary mail' },
-    { dir: 'throwaway-email', keyword: 'Throwaway Email', short: 'throwaway email' },
-    { dir: 'temp-mail-generator', keyword: 'Temp Mail Generator', short: 'temp mail generator' }
-];
+const newHeaders = {
+    'anonymous-email': { h: 'Free Anonymous Email', s: 'Untraceable • Secure • Private' },
+    'burner-email': { h: 'Free Burner Email', s: 'Instant • Disposable • Unlinked' },
+    '10-minute-mail': { h: 'Free 10 Minute Mail', s: 'Fast • Ephemeral • Secure' },
+    'custom-mail': { h: 'Custom Temp Mail', s: 'Personalized • Flexible • Private' },
+    'disposable-mail': { h: 'Free Disposable Mail', s: 'Fast • Trashable • Clean' },
+    'fake-mail': { h: 'Free Fake Email', s: 'Alias • Bypassing • Protected' },
+    'free-mail': { h: 'Free Temp Mail', s: 'Cost-free • Unlimited • Secure' },
+    'random-mail': { h: 'Free Random Email', s: 'Unpredictable • Hidden • Disposable' },
+    'temp-email': { h: 'Free Temp Email', s: 'Temporary • Clean • Private' },
+    'temp-mail-free': { h: 'Free Temp Mail', s: 'Free • Temporary • Secure' },
+    'tempEmail': { h: 'Free TempEmail Inbox', s: 'Instant • Programmatic • Clean' },
+    'temporary-email': { h: 'Free Temporary Email', s: 'Instant • Disposable • Private' },
+    'temporary-mail': { h: 'Free Temporary Mail', s: 'Fast • Temporary • Secure' },
+    'throwaway-email': { h: 'Free Throwaway Email', s: 'Disposable • Untracked • Clean' },
+    'temp-mail-generator': { h: 'Temp Mail Generator', s: 'Dynamic • Fast • Disposable' }
+};
 
-for (const page of pages) {
-    const pagePath = path.join(__dirname, 'app', page.dir, 'page.tsx');
-    if (fs.existsSync(pagePath)) {
-        let content = fs.readFileSync(pagePath, 'utf8');
+for (const [dir, data] of Object.entries(newHeaders)) {
+    const pagePath = path.join(process.cwd(), 'app', dir, 'page.tsx');
+    if (!fs.existsSync(pagePath)) continue;
 
-        // Logic to ensure heading is 2-3 words
-        let finalHeading = page.keyword;
-
-        // Try stripping "Free " if it exists
-        let stripped = page.keyword.replace(/^Free\s+/i, '');
-        let strippedWords = stripped.split(' ').filter(w => w.trim().length > 0);
-
-        // If stripping "Free" leaves us with 2 or more words, we keep the clean stripped version
-        // If it leaves us with 1 word (like "Free Mail" -> "Mail"), we DO NOT strip it, so finalHeading remains "Free Mail".
-        if (strippedWords.length >= 2) {
-            finalHeading = stripped;
-        }
-
-        // If the keyword itself is 1 word (like "Tempemail"), let's prepend "Free " to make it "Free Tempemail"
-        if (finalHeading.split(' ').filter(w => w.trim().length > 0).length === 1) {
-            // e.g., "Tempemail" turns into "Free Tempemail"
-            // Also helps if somehow we ended up with 1 word, we secure a minimum of 2.
-            finalHeading = 'Free ' + finalHeading;
-        }
-
-        content = content.replace(/heading="[^"]+"/, `heading="${finalHeading}"`);
-        fs.writeFileSync(pagePath, content);
-        console.log(`Updated ${page.dir} heading to "${finalHeading}"`);
-    }
+    let content = fs.readFileSync(pagePath, 'utf8');
+    
+    // Replace the heading and subheading props in the code
+    content = content.replace(/heading="[^"]*"/, `heading="${data.h}"`);
+    content = content.replace(/subheading="[^"]*"/, `subheading="${data.s}"`);
+    
+    fs.writeFileSync(pagePath, content);
+    console.log(`Updated heading/subheading for ${dir}`);
 }

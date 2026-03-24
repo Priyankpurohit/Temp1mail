@@ -1,40 +1,45 @@
 import { LandingPageTemplate } from "@/components/LandingPageTemplate";
 import Link from "next/link";
 
-export default function TempEmailPage() {
+export default function TempEmailGeneratorPage() {
     return (
         <LandingPageTemplate
-            heading="Temp Email"
-            subheading="Instant • Disposable • Private"
-            intro="Free temp email address instantly. No registration, no spam. Your disposable inbox auto-deletes after 10 minutes."
+            heading="Free TempEmail Inbox"
+            subheading="Instant • Programmatic • Clean"
+            intro="Deploy a fast TempEmail address instantly. No fuss, no spam. Your dynamic inbox auto-deletes after 10 minutes."
             features={[
-                { icon: "Zap", title: "Instant", desc: "Get your email in under 1 second" },
-                { icon: "Shield", title: "Private Inbox", desc: "No signup, no tracking, no logs" },
-                { icon: "Clock", title: "Auto-Delete", desc: "All emails erased after 10 minutes" }
+                { icon: "Zap", title: "High Performance", desc: "Optimized routing for immediate message receipt." },
+                { icon: "Eye", title: "No Distractions", desc: "A clean UI focused purely on your incoming messages." },
+                { icon: "Globe", title: "Global Edge Routing", desc: "Ensures your emails traverse the web fastest." }
             ]}
             faqs={[
                 { 
-                    question: "What is a temp email?", 
-                    answer: <>A temp email provides free, instant disposable email addresses. If you need something slightly different, you can also try a <Link href="/temp-email" className="text-primary hover:underline">temp email</Link>, a <Link href="/free-mail" className="text-primary hover:underline">free mail</Link>, or a <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link> to sign up for services without registration.</> 
+                    question: "Why choose TempEmail?", 
+                    answer: <>This is the fastest path to a fresh inbox, catered to users who want no fluff. If you prefer a distinct name, explore <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link>.</>, 
+                    schemaAnswer: "This is the fastest path to a fresh inbox, catered to users who want no fluff. If you prefer a distinct name, explore custom mail." 
                 },
                 { 
-                    question: "How long does a temp email last?", 
-                    answer: <>Each temp email address lasts for 10 minutes from creation. This operates similarly to a <Link href="/temp-mail-generator" className="text-primary hover:underline">temp mail generator</Link>, a <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link>, or a <Link href="/temp-mail-free" className="text-primary hover:underline">free temp mail</Link>, automatically and permanently deleting all messages afterwards.</> 
+                    question: "Is this the same as 10-minute mail?", 
+                    answer: <>Yes, the underlying engine relies on similar timeouts. You can check the <Link href="/10-minute-mail" className="text-primary hover:underline">10 minute mail</Link> page for specifics.</>, 
+                    schemaAnswer: "Yes, the underlying engine relies on similar timeouts. You can check the 10 minute mail page for specifics." 
                 },
                 { 
-                    question: "Is this temp email free to use?", 
-                    answer: <>Yes, this temp email service is completely free. We also offer other tools like the <Link href="/disposable-mail" className="text-primary hover:underline">disposable mail</Link>, the <Link href="/throwaway-email" className="text-primary hover:underline">throwaway email</Link>, and the <Link href="/temporary-mail" className="text-primary hover:underline">temporary mail</Link> with absolutely no hidden fees and no limits.</> 
+                    question: "Can I script against this?", 
+                    answer: <>While we do not offer a public API, the UI is hyper-responsive. For testing suites, a <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link> works best.</>, 
+                    schemaAnswer: "While we do not offer a public API, the UI is hyper-responsive. For testing suites, a fake mail works best." 
                 },
                 { 
-                    question: "Can I choose my own temp email address?", 
-                    answer: <>Absolutely! You can type in any custom prefix, or let us generate one for you. For more tailored addresses, consider creating a <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link> or a <Link href="/10-minute-mail" className="text-primary hover:underline">10 minute mail</Link> for your specific needs.</> 
+                    question: "How reliable is the domain?", 
+                    answer: <>We use high-reputation domains to avoid aggressive spam lists, acting as a high-tier <Link href="/burner-email" className="text-primary hover:underline">burner email</Link>.</>, 
+                    schemaAnswer: "We use high-reputation domains to avoid aggressive spam lists, acting as a high-tier burner email." 
                 },
                 { 
-                    question: "Why use a temp email instead of my real email?", 
-                    answer: <>Using a temp email protects your primary inbox from data leaks and marketing spam. Much like a <Link href="/burner-email" className="text-primary hover:underline">burner email</Link> or a <Link href="/random-mail" className="text-primary hover:underline">random mail</Link>, it acts as a reliable shield between your private details and potentially untrustworthy websites.</> 
+                    question: "Are there any usage limits?", 
+                    answer: <>Refresh and generate as often as needed, just like our <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link>.</>, 
+                    schemaAnswer: "Refresh and generate as often as needed, just like our temporary email." 
                 }
             ]}
-            ctaText="Create Temp Email"
+            ctaText="Initialize TempEmail"
         />
     );
 }

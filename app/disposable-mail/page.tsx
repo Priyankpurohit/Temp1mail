@@ -4,37 +4,42 @@ import Link from "next/link";
 export default function DisposableMailPage() {
     return (
         <LandingPageTemplate
-            heading="Disposable Mail"
-            subheading="Instant • Disposable • Private"
-            intro="Free disposable mail address instantly. No registration, no spam. Your disposable inbox auto-deletes after 10 minutes."
+            heading="Free Disposable Mail"
+            subheading="Fast • Trashable • Clean"
+            intro="Launch a disposable mail address instantly. No passwords, no spam. Your temporary inbox disappears after 10 minutes."
             features={[
-                { icon: "Zap", title: "Instant", desc: "Get your email in under 1 second" },
-                { icon: "Shield", title: "Private Inbox", desc: "No signup, no tracking, no logs" },
-                { icon: "Clock", title: "Auto-Delete", desc: "All emails erased after 10 minutes" }
+                { icon: "Trash2", title: "True Disposability", desc: "Designed to be thrown away without a second thought." },
+                { icon: "Zap", title: "Zero Friction", desc: "No complex setups, just a ready-to-use inbox." },
+                { icon: "Eye", title: "Anti-Phishing", desc: "Filter out malicious links before they hit your real email." }
             ]}
             faqs={[
                 { 
-                    question: "What is a disposable mail?", 
-                    answer: <>A disposable mail provides free, instant disposable email addresses. If you need something slightly different, you can also try a <Link href="/temp-mail-generator" className="text-primary hover:underline">temp mail generator</Link>, a <Link href="/throwaway-email" className="text-primary hover:underline">throwaway email</Link>, or a <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link> to sign up for services without registration.</> 
+                    question: "Why are disposable emails important?", 
+                    answer: <>They act as a firewall against the constant threat of spam. For a similarly structured option, look at <Link href="/throwaway-email" className="text-primary hover:underline">throwaway email</Link>.</>, 
+                    schemaAnswer: "They act as a firewall against the constant threat of spam. For a similarly structured option, look at throwaway email." 
                 },
                 { 
-                    question: "How long does a disposable mail last?", 
-                    answer: <>Each disposable mail address lasts for 10 minutes from creation. This operates similarly to a <Link href="/tempEmail" className="text-primary hover:underline">temp email</Link>, a <Link href="/free-mail" className="text-primary hover:underline">free mail</Link>, or a <Link href="/10-minute-mail" className="text-primary hover:underline">10 minute mail</Link>, automatically and permanently deleting all messages afterwards.</> 
+                    question: "Do disposable addresses look suspicious?", 
+                    answer: <>Some sites block known temporary domains, but we frequently cycle ours to maintain high delivery rates. A <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link> can also help bypass filters.</>, 
+                    schemaAnswer: "Some sites block known temporary domains, but we frequently cycle ours to maintain high delivery rates. A custom mail can also help bypass filters." 
                 },
                 { 
-                    question: "Is this disposable mail free to use?", 
-                    answer: <>Yes, this disposable mail service is completely free. We also offer other tools like the <Link href="/temp-mail-free" className="text-primary hover:underline">free temp mail</Link>, the <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link>, and the <Link href="/temporary-mail" className="text-primary hover:underline">temporary mail</Link> with absolutely no hidden fees and no limits.</> 
+                    question: "Is registration required?", 
+                    answer: <>Absolutely not. This is a frictionless service like our <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link>.</>, 
+                    schemaAnswer: "Absolutely not. This is a frictionless service like our fake mail." 
                 },
                 { 
-                    question: "Can I choose my own disposable mail address?", 
-                    answer: <>Absolutely! You can type in any custom prefix, or let us generate one for you. For more tailored addresses, consider creating a <Link href="/temp-email" className="text-primary hover:underline">temp email</Link> or a <Link href="/burner-email" className="text-primary hover:underline">burner email</Link> for your specific needs.</> 
+                    question: "What happens if I accidentally close the tab?", 
+                    answer: <>The session ends and the inbox is deleted immediately. If you need something persistent, do not use a <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link>.</>, 
+                    schemaAnswer: "The session ends and the inbox is deleted immediately. If you need something persistent, do not use a temporary email." 
                 },
                 { 
-                    question: "Why use a disposable mail instead of my real email?", 
-                    answer: <>Using a disposable mail protects your primary inbox from data leaks and marketing spam. Much like a <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link> or a <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link>, it acts as a reliable shield between your private details and potentially untrustworthy websites.</> 
+                    question: "Can I reply to messages?", 
+                    answer: <>Disposable inboxes here are for receiving only. Check our <Link href="/temp-mail-generator" className="text-primary hover:underline">temp mail generator</Link> for more details.</>, 
+                    schemaAnswer: "Disposable inboxes here are for receiving only. Check our temp mail generator for more details." 
                 }
             ]}
-            ctaText="Create Disposable Mail"
+            ctaText="Get Disposable Mail"
         />
     );
 }

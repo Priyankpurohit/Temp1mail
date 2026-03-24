@@ -1,40 +1,45 @@
 import { LandingPageTemplate } from "@/components/LandingPageTemplate";
 import Link from "next/link";
 
-export default function TemporaryMailPage() {
+export default function TemporaryMailInboxPage() {
     return (
         <LandingPageTemplate
-            heading="Temporary Mail"
-            subheading="Instant • Disposable • Private"
-            intro="Free temporary mail address instantly. No registration, no spam. Your disposable inbox auto-deletes after 10 minutes."
+            heading="Free Temporary Mail"
+            subheading="Fast • Temporary • Secure"
+            intro="Create a temporary mail address instantly. No subscriptions, no spam. Your clean inbox auto-deletes after 10 minutes."
             features={[
-                { icon: "Zap", title: "Instant", desc: "Get your email in under 1 second" },
-                { icon: "Shield", title: "Private Inbox", desc: "No signup, no tracking, no logs" },
-                { icon: "Clock", title: "Auto-Delete", desc: "All emails erased after 10 minutes" }
+                { icon: "Clock", title: "Time-Limited", desc: "Ensures no lingering digital footprints exist." },
+                { icon: "Mail", title: "Flawless Parsing", desc: "Renders HTML emails beautifully and securely." },
+                { icon: "UserX", title: "No Strings Attached", desc: "Leave whenever you want without deregistering." }
             ]}
             faqs={[
                 { 
-                    question: "What is a temporary mail?", 
-                    answer: <>A temporary mail provides free, instant disposable email addresses. If you need something slightly different, you can also try a <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link>, a <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link>, or a <Link href="/10-minute-mail" className="text-primary hover:underline">10 minute mail</Link> to sign up for services without registration.</> 
+                    question: "Is temporary mail different from temporary email?", 
+                    answer: <>They are exactly identical in function, just different phrasing! You can also refer to it as a <Link href="/temp-email" className="text-primary hover:underline">temp email</Link>.</>, 
+                    schemaAnswer: "They are exactly identical in function, just different phrasing! You can also refer to it as a temp email." 
                 },
                 { 
-                    question: "How long does a temporary mail last?", 
-                    answer: <>Each temporary mail address lasts for 10 minutes from creation. This operates similarly to a <Link href="/tempEmail" className="text-primary hover:underline">temp email</Link>, a <Link href="/temp-mail-generator" className="text-primary hover:underline">temp mail generator</Link>, or a <Link href="/throwaway-email" className="text-primary hover:underline">throwaway email</Link>, automatically and permanently deleting all messages afterwards.</> 
+                    question: "Will I get spam here?", 
+                    answer: <>You will receive the spam intended for your real inbox, and then it gets deleted! That is the beauty of a <Link href="/disposable-mail" className="text-primary hover:underline">disposable mail</Link>.</>, 
+                    schemaAnswer: "You will receive the spam intended for your real inbox, and then it gets deleted! That is the beauty of a disposable mail." 
                 },
                 { 
-                    question: "Is this temporary mail free to use?", 
-                    answer: <>Yes, this temporary mail service is completely free. We also offer other tools like the <Link href="/free-mail" className="text-primary hover:underline">free mail</Link>, the <Link href="/temp-email" className="text-primary hover:underline">temp email</Link>, and the <Link href="/burner-email" className="text-primary hover:underline">burner email</Link> with absolutely no hidden fees and no limits.</> 
+                    question: "How do I generate one?", 
+                    answer: <>Click the button above. For a specific name, use our <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link>.</>, 
+                    schemaAnswer: "Click the button above. For a specific name, use our custom mail." 
                 },
                 { 
-                    question: "Can I choose my own temporary mail address?", 
-                    answer: <>Absolutely! You can type in any custom prefix, or let us generate one for you. For more tailored addresses, consider creating a <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link> or a <Link href="/random-mail" className="text-primary hover:underline">random mail</Link> for your specific needs.</> 
+                    question: "Can I keep it forever?", 
+                    answer: <>No, these addresses are inherently temporary, much like a <Link href="/10-minute-mail" className="text-primary hover:underline">10 minute mail</Link>.</>, 
+                    schemaAnswer: "No, these addresses are inherently temporary, much like a 10 minute mail." 
                 },
                 { 
-                    question: "Why use a temporary mail instead of my real email?", 
-                    answer: <>Using a temporary mail protects your primary inbox from data leaks and marketing spam. Much like a <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link> or a <Link href="/temp-mail-free" className="text-primary hover:underline">free temp mail</Link>, it acts as a reliable shield between your private details and potentially untrustworthy websites.</> 
+                    question: "Who runs this service?", 
+                    answer: <>Privacy advocates who believe in <Link href="/temp-mail-free" className="text-primary hover:underline">free temp mail</Link> for everyone.</>, 
+                    schemaAnswer: "Privacy advocates who believe in free temp mail for everyone." 
                 }
             ]}
-            ctaText="Create Temporary Mail"
+            ctaText="Open Temporary Mail"
         />
     );
 }

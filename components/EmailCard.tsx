@@ -165,10 +165,10 @@ function OtpBadge({ code, onCopy }: { code: string; onCopy: (c: string) => void 
       tabIndex={0}
       onClick={handleClick}
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleClick(e as unknown as React.MouseEvent); }}
-      className="inline-flex items-center gap-1 otp-highlight text-xs cursor-pointer"
+      className="inline-flex items-center gap-1.5 otp-highlight text-xs font-semibold cursor-pointer bg-primary/10 text-primary hover:bg-primary/20 px-2 py-1 rounded-md transition-colors"
     >
       {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-      {code}
+      {copied ? "Copied" : `Copy: ${code}`}
     </span>
   );
 }

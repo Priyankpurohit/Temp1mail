@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Throwaway Email - Instant Temporary Inbox",
+    title: "Free Throwaway Email - Instant Trashable Inbox (No Tracking)",
     description: "Create a throwaway email instantly. Fast, secure, and disposable at temp1mail.com. Free, no registration, auto-deletes in 10 minutes.",
     alternates: { canonical: "https://temp1mail.com/throwaway-email" },
     openGraph: {
-        title: "Throwaway Email - Fast Temporary Inbox | Temp1Mail",
+        title: "Free Throwaway Email - Instant Trashable Inbox (No Tracking)",
         description: "Your safe throwaway email. Fast temporary inbox, free and instant.",
         url: "https://temp1mail.com/throwaway-email",
     },

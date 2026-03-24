@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Temporary Email Address - Private Disposable Inbox",
+    title: "Free Temporary Email - Instant Disposable Inbox (No Signup)",
     description: "Create a temporary email address to protect your online privacy. Instant disposable inbox, no registration, no data tracking. All emails auto-delete in 10 minutes.",
     alternates: { canonical: "https://temp1mail.com/temporary-email" },
     openGraph: {
-        title: "Temporary Email Address - Private Inbox | Temp1Mail",
+        title: "Free Temporary Email - Instant Disposable Inbox (No Signup)",
         description: "Protect your privacy with a temporary email address. Instant setup, no tracking, auto-delete.",
         url: "https://temp1mail.com/temporary-email",
     },

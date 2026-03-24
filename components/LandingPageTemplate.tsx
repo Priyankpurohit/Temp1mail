@@ -70,6 +70,26 @@ export function LandingPageTemplate({
 }: LandingPageProps) {
     return (
         <div className="relative min-h-screen flex flex-col overflow-hidden bg-background">
+            {/* FAQ Schema Injector */}
+            {faqs.some(f => f.schemaAnswer) && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "FAQPage",
+                            mainEntity: faqs.map((f) => ({
+                                "@type": "Question",
+                                name: f.question,
+                                acceptedAnswer: {
+                                    "@type": "Answer",
+                                    text: f.schemaAnswer || "",
+                                },
+                            })),
+                        }),
+                    }}
+                />
+            )}
             {/* Animated gradient background */}
             <div className="pointer-events-none absolute inset-0">
                 <div className="absolute -left-1/4 -top-1/4 h-[600px] w-[600px] rounded-full bg-primary/10 blur-[120px] animate-pulse-glow" />

@@ -4,37 +4,42 @@ import Link from "next/link";
 export default function BurnerEmailPage() {
     return (
         <LandingPageTemplate
-            heading="Burner Email"
-            subheading="Instant • Disposable • Private"
-            intro="Free burner email address instantly. No registration, no spam. Your disposable inbox auto-deletes after 10 minutes."
+            heading="Free Burner Email"
+            subheading="Instant • Disposable • Unlinked"
+            intro="Create a burner email address instantly. No commitments, no spam. Your disposable inbox vaporizes after 10 minutes."
             features={[
-                { icon: "Zap", title: "Instant", desc: "Get your email in under 1 second" },
-                { icon: "Shield", title: "Private Inbox", desc: "No signup, no tracking, no logs" },
-                { icon: "Clock", title: "Auto-Delete", desc: "All emails erased after 10 minutes" }
+                { icon: "Trash2", title: "Toss It Away", desc: "Abandon the inbox anytime with zero consequence." },
+                { icon: "Shield", title: "Spam Deflector", desc: "Catches junk mail so your real inbox does not have to." },
+                { icon: "Zap", title: "On-Demand", desc: "Spin up a new burner in milliseconds." }
             ]}
             faqs={[
                 { 
                     question: "What is a burner email?", 
-                    answer: <>A burner email provides free, instant disposable email addresses. If you need something slightly different, you can also try a <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link>, a <Link href="/disposable-mail" className="text-primary hover:underline">disposable mail</Link>, or a <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link> to sign up for services without registration.</> 
+                    answer: <>It is a temporary address designed to be used exactly once and then abandoned. It is similar to a <Link href="/throwaway-email" className="text-primary hover:underline">throwaway email</Link>.</>, 
+                    schemaAnswer: "It is a temporary address designed to be used exactly once and then abandoned. It is similar to a throwaway email." 
                 },
                 { 
-                    question: "How long does a burner email last?", 
-                    answer: <>Each burner email address lasts for 10 minutes from creation. This operates similarly to a <Link href="/random-mail" className="text-primary hover:underline">random mail</Link>, a <Link href="/temp-mail-free" className="text-primary hover:underline">free temp mail</Link>, or a <Link href="/temp-mail-generator" className="text-primary hover:underline">temp mail generator</Link>, automatically and permanently deleting all messages afterwards.</> 
+                    question: "Do I need a password for my burner?", 
+                    answer: <>No passwords needed. Just generate it and read. If you want something specific, you can build a <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link>.</>, 
+                    schemaAnswer: "No passwords needed. Just generate it and read. If you want something specific, you can build a custom mail." 
                 },
                 { 
-                    question: "Is this burner email free to use?", 
-                    answer: <>Yes, this burner email service is completely free. We also offer other tools like the <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link>, the <Link href="/10-minute-mail" className="text-primary hover:underline">10 minute mail</Link>, and the <Link href="/temp-email" className="text-primary hover:underline">temp email</Link> with absolutely no hidden fees and no limits.</> 
+                    question: "Can a burner address be recovered?", 
+                    answer: <>Once it expires or you close the session, it is gone forever. This is par for the course for any <Link href="/disposable-mail" className="text-primary hover:underline">disposable mail</Link>.</>, 
+                    schemaAnswer: "Once it expires or you close the session, it is gone forever. This is par for the course for any disposable mail." 
                 },
                 { 
-                    question: "Can I choose my own burner email address?", 
-                    answer: <>Absolutely! You can type in any custom prefix, or let us generate one for you. For more tailored addresses, consider creating a <Link href="/throwaway-email" className="text-primary hover:underline">throwaway email</Link> or a <Link href="/tempEmail" className="text-primary hover:underline">temp email</Link> for your specific needs.</> 
+                    question: "Should I use this for my bank account?", 
+                    answer: <>Absolutely not. Burners should only be used for untrusted sites. For general quick testing, consider a <Link href="/temp-email" className="text-primary hover:underline">temp email</Link>.</>, 
+                    schemaAnswer: "Absolutely not. Burners should only be used for untrusted sites. For general quick testing, consider a temp email." 
                 },
                 { 
-                    question: "Why use a burner email instead of my real email?", 
-                    answer: <>Using a burner email protects your primary inbox from data leaks and marketing spam. Much like a <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link> or a <Link href="/free-mail" className="text-primary hover:underline">free mail</Link>, it acts as a reliable shield between your private details and potentially untrustworthy websites.</> 
+                    question: "Is there a limit on how many I can use?", 
+                    answer: <>There are no limits. Generate as many as you need, just like with our <Link href="/temp-mail-free" className="text-primary hover:underline">free temp mail</Link>.</>, 
+                    schemaAnswer: "There are no limits. Generate as many as you need, just like with our free temp mail." 
                 }
             ]}
-            ctaText="Create Burner Email"
+            ctaText="Create Burner"
         />
     );
 }
