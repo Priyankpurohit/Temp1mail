@@ -14,6 +14,14 @@ export const metadata: Metadata = {
 
 const posts = [
     {
+        title: "7 Best Temp Mail Services in 2026 - I Tested 14, Here Are the 7 Worth Using",
+        excerpt:
+            "We signed up for 14 temp mail services and tested each one on the platforms that matter most - Discord, ChatGPT, Reddit, and more. Here's what actually works in 2026.",
+        date: "2026-03-25",
+        slug: "best-temp-mail-services-2026-tested-compared",
+        readTime: "14 min read",
+    },
+    {
         title: "Best Temporary Email Services in 2026: Why Temp1Mail Dominates",
         excerpt:
             "We tested 20+ providers on speed, privacy, retention, and features. See how Temp1Mail stacks up against 10 Minute Mail, YOPmail, Guerrilla Mail, and more.",
