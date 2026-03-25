@@ -30,7 +30,7 @@ export default function TenMinuteMailPage() {
                 },
                 { 
                     question: "Does it autorefresh?", 
-                    answer: <>Yes, the inbox automatically checks for new messages. You can also try our <Link href="/tempEmail" className="text-primary hover:underline">temp email</Link> for an alternative view.</>, 
+                    answer: <>Yes, the inbox automatically checks for new messages. You can also try our <Link href="/tempemail" className="text-primary hover:underline">temp email</Link> for an alternative view.</>, 
                     schemaAnswer: "Yes, the inbox automatically checks for new messages. You can also try our temp email for an alternative view." 
                 },
                 { 

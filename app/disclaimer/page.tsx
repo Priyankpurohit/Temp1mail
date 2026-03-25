@@ -55,7 +55,7 @@ export default function DisclaimerPage() {
                             Limitation of Liability
                         </h2>
                         <p>
-                            Temp1Mail and its operators shall not be liable for any direct, indirect, incidental, or consequential damages arising from the use or inability to use this <Link href="/free-mail" className="text-primary hover:underline">free mail</Link> service, including our <Link href="/random-mail" className="text-primary hover:underline">random mail</Link> or <Link href="/temp-email" className="text-primary hover:underline">temp email</Link> addresses. We recommend not using it for important accounts where a <Link href="/primary-email" className="text-primary hover:underline">primary email</Link> is required.
+                            Temp1Mail and its operators shall not be liable for any direct, indirect, incidental, or consequential damages arising from the use or inability to use this <Link href="/free-mail" className="text-primary hover:underline">free mail</Link> service, including our <Link href="/random-mail" className="text-primary hover:underline">random mail</Link> or <Link href="/temp-email" className="text-primary hover:underline">temp email</Link> addresses. We recommend not using it for important accounts where a primary email is required.
                         </p>
                     </section>
 

@@ -12,7 +12,7 @@ const newIntros = {
     'random-mail': 'Spin up a random mail instantly. No typing, no spam. Your unpredictable inbox wipes clean after 10 minutes.',
     'temp-email': 'Grab a temp email address instantly. No registration, no spam. Your temporary inbox auto-deletes after 10 minutes.',
     'temp-mail-free': 'Open your free temp mail instantly. No charges, no spam. Your protected inbox auto-deletes after 10 minutes.',
-    'tempEmail': 'Deploy a fast TempEmail address instantly. No fuss, no spam. Your dynamic inbox auto-deletes after 10 minutes.',
+    'tempemail': 'Deploy a fast TempEmail address instantly. No fuss, no spam. Your dynamic inbox auto-deletes after 10 minutes.',
     'temporary-email': 'Get a temporary email address instantly. No registration, no spam. Your secure inbox auto-deletes after 10 minutes.',
     'temporary-mail': 'Create a temporary mail address instantly. No subscriptions, no spam. Your clean inbox auto-deletes after 10 minutes.',
     'throwaway-email': 'Make a throwaway email address instantly. No tracking, no spam. Your dumped inbox auto-deletes after 10 minutes.',

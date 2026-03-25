@@ -12,7 +12,7 @@ const pages = [
     { dir: 'random-mail', keyword: 'Random Mail', short: 'random mail' },
     { dir: 'temp-email', keyword: 'Temp Email', short: 'temp email' },
     { dir: 'temp-mail-free', keyword: 'Temp Mail Free', short: 'free temp mail' },
-    { dir: 'tempEmail', keyword: 'Temp Email', short: 'temp email' },
+    { dir: 'tempemail', keyword: 'Temp Email', short: 'temp email' },
     { dir: 'temporary-email', keyword: 'Temporary Email', short: 'temporary email' },
     { dir: 'temporary-mail', keyword: 'Temporary Mail', short: 'temporary mail' },
     { dir: 'throwaway-email', keyword: 'Throwaway Email', short: 'throwaway email' },

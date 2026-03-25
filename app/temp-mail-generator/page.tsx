@@ -15,7 +15,7 @@ export default function TempMailGeneratorPage() {
             faqs={[
                 { 
                     question: "How does the generator work?", 
-                    answer: <>It dynamically assigns an alias on our mail servers routing to your active browser session. If you want to dive in, use the <Link href="/tempEmail" className="text-primary hover:underline">temp email</Link> page.</>, 
+                    answer: <>It dynamically assigns an alias on our mail servers routing to your active browser session. If you want to dive in, use the <Link href="/tempemail" className="text-primary hover:underline">temp email</Link> page.</>, 
                     schemaAnswer: "It dynamically assigns an alias on our mail servers routing to your active browser session. If you want to dive in, use the temp email page." 
                 },
                 { 

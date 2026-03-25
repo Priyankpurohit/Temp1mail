@@ -47,7 +47,7 @@ export default function BlogPost2() {
 
                         <p>
                             Many websites now require email verification before you can access their content or services, which is why a <Link href="/temporary-email" className="text-primary hover:opacity-80 transition-opacity">temporary email</Link> is essential.
-                            The problem? Handing over your <Link href="/primary-email" className="text-primary hover:opacity-80 transition-opacity">primary email</Link> means spam, marketing emails, and potential data breaches.
+                            The problem? Handing over your primary email means spam, marketing emails, and potential data breaches.
                             Using a <Link href="/throwaway-email" className="text-primary hover:opacity-80 transition-opacity">throwaway email</Link> or <strong className="text-foreground">disposable email</strong> for signups lets you get the verification
                             code you need without any of the risks.
                         </p>

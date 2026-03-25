@@ -52,7 +52,7 @@ const pagesData = {
             { q: 'Why exactly 10 minutes?', a: 'Ten minutes is the optimal time for a verification email to arrive while still ensuring the inbox does not linger. If you want total unpredictability, use a <Link href="/random-mail" className="text-primary hover:underline">random mail</Link>.' },
             { q: 'Can I extend the timer?', a: 'Currently, the timer is fixed to ensure high turnover and security, similar to a <Link href="/temporary-mail" className="text-primary hover:underline">temporary mail</Link>.' },
             { q: 'What happens to the emails after 10 minutes?', a: 'They are permanently wiped from our physical servers. Just like our <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link>, we leave no trace.' },
-            { q: 'Does it autorefresh?', a: 'Yes, the inbox automatically checks for new messages. You can also try our <Link href="/tempEmail" className="text-primary hover:underline">temp email</Link> for an alternative view.' },
+            { q: 'Does it autorefresh?', a: 'Yes, the inbox automatically checks for new messages. You can also try our <Link href="/tempemail" className="text-primary hover:underline">temp email</Link> for an alternative view.' },
             { q: 'Is it completely free?', a: 'Yes, 100% free with no catches. You might also like our <Link href="/temp-mail-free" className="text-primary hover:underline">temp mail free</Link> option.' }
         ]
     },
@@ -159,7 +159,7 @@ const pagesData = {
         faqs: [
             { q: 'What is a temporary email?', a: 'It is a transitional mailbox that exists only long enough to serve an immediate need, otherwise known as a <Link href="/temporary-mail" className="text-primary hover:underline">temporary mail</Link>.' },
             { q: 'Why should I not use my Gmail?', a: 'Using real emails invites data brokers to profile you. Using this is much safer, like an <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link>.' },
-            { q: 'How do I check my messages?', a: 'They appear automatically on your screen. You can also view them via our <Link href="/tempEmail" className="text-primary hover:underline">temp email</Link> variant page.' },
+            { q: 'How do I check my messages?', a: 'They appear automatically on your screen. You can also view them via our <Link href="/tempemail" className="text-primary hover:underline">temp email</Link> variant page.' },
             { q: 'Is there a cost involved?', a: 'No, this is absolutely free. For more details, see our <Link href="/free-mail" className="text-primary hover:underline">free mail</Link> feature.' },
             { q: 'Can I do a custom name?', a: 'Yes, you can edit the prefix before hitting generate, which is our <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link> functionality.' }
         ]
@@ -182,7 +182,7 @@ const pagesData = {
             { q: 'Is it mobile friendly?', a: 'Absolutely, the UI scales down perfectly, much like using a <Link href="/random-mail" className="text-primary hover:underline">random mail</Link> on your phone.' }
         ]
     },
-    'tempEmail': {
+    'tempemail': {
         heading: 'TempEmail Generator',
         subheading: 'Quick • Programmatic • Clean',
         intro: 'Built for efficiency. Need a rapid, no-nonsense TempEmail? Our raw generator engine skips the bloat and delivers inbox access at the speed of thought.',
@@ -265,7 +265,7 @@ const pagesData = {
             { icon: 'Globe', title: 'Dynamic Domains', desc: 'We rotate domains to keep the generator effective.' }
         ],
         faqs: [
-            { q: 'How does the generator work?', a: 'It dynamically assigns an alias on our mail servers routing to your active browser session. If you want to dive in, use the <Link href="/tempEmail" className="text-primary hover:underline">temp email</Link> page.' },
+            { q: 'How does the generator work?', a: 'It dynamically assigns an alias on our mail servers routing to your active browser session. If you want to dive in, use the <Link href="/tempemail" className="text-primary hover:underline">temp email</Link> page.' },
             { q: 'Can I customize the generated mail?', a: 'Yes! Our generator supports custom prefixes. Explore the <Link href="/custom-mail" className="text-primary hover:underline">custom mail</Link> feature.' },
             { q: 'Are generated emails truly anonymous?', a: 'They are routed without retaining personal identifiers, making them an excellent <Link href="/anonymous-email" className="text-primary hover:underline">anonymous email</Link>.' },
             { q: 'What happens if I generate too many?', a: 'There are no strict limits for fair personal use. It acts as a totally <Link href="/free-mail" className="text-primary hover:underline">free mail</Link> tool.' },

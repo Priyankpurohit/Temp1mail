@@ -47,7 +47,7 @@ export default function PrivacyPage() {
                             1. Data Collection &amp; Storage
                         </h2>
                         <p>
-                            When you create a <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link> address or use our <Link href="/temp-mail-generator" className="text-primary hover:underline">temp mail generator</Link>, we store the address itself and any emails received by it. We do not collect any personal information about you to protect your <Link href="/primary-email" className="text-primary hover:underline">primary email</Link> identity (e.g., IP address, browser details).
+                            When you create a <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link> address or use our <Link href="/temp-mail-generator" className="text-primary hover:underline">temp mail generator</Link>, we store the address itself and any emails received by it. We do not collect any personal information about you to protect your primary email identity (e.g., IP address, browser details).
                         </p>
                     </section>
 

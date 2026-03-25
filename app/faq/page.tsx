@@ -83,7 +83,7 @@ export default function FAQPage() {
                             <p>
                                 With <Link href="/" className="text-primary hover:opacity-80 transition-opacity">Temp1Mail</Link>,
                                 you can instantly create a <Link href="/free-mail" className="text-primary hover:opacity-80 transition-opacity">free temp email</Link> that auto-deletes after 10 minutes (just like a <Link href="/10-minute-mail" className="text-primary hover:opacity-80 transition-opacity">10 minute mail</Link>), keeping your
-                                real inbox clean and your identity anonymous.
+                                real inbox clean and your identity anonymous. Your new <Link href="/disposable-inbox" className="text-primary hover:opacity-80 transition-opacity">disposable inbox</Link> blocks all spam effortlessly.
                             </p>
                         </FAQAccordion>
 
@@ -93,7 +93,7 @@ export default function FAQPage() {
                                 Using Temp1Mail is simple: visit the homepage, type a
                                 custom address or click{" "}
                                 <Link href="/random-mail" className="text-primary hover:opacity-80 transition-opacity">Generate Random Mail</Link>
-                                , and your temporary inbox is ready instantly.
+                                , and your <Link href="/temporary-inbox" className="text-primary hover:opacity-80 transition-opacity">temporary inbox</Link> is ready instantly via our robust <Link href="/email-generator" className="text-primary hover:opacity-80 transition-opacity">email generator</Link>.
                             </p>
                             <p>
                                 Any emails sent to your disposable address appear in real-time. Your inbox automatically
@@ -112,7 +112,7 @@ export default function FAQPage() {
                             </p>
                             <p>
                                 There are no hidden fees, no premium tiers, and no limits on how many <Link href="/temporary-email" className="text-primary hover:opacity-80 transition-opacity">temporary
-                                    email</Link> addresses you can create.
+                                    email</Link> addresses you can create. It acts as an excellent <Link href="/email-for-verification" className="text-primary hover:opacity-80 transition-opacity">email for verification</Link>.
                             </p>
                         </FAQAccordion>
 
@@ -138,7 +138,7 @@ export default function FAQPage() {
                                 Absolutely! Temp1Mail is ideal for receiving verification codes, OTPs, and
                                 confirmation emails. Many users use our disposable email addresses to sign up
                                 for websites, verify accounts, and receive one-time passwords without exposing
-                                their real email.
+                                their real email. It functions flawlessly as an <Link href="/email-for-otp" className="text-primary hover:opacity-80 transition-opacity">email for otp</Link>.
                             </p>
                             <p>
                                 Simply{" "}
@@ -170,7 +170,7 @@ export default function FAQPage() {
                                 outgoing emails from your temporary address.
                             </p>
                             <p>
-                                This is by design. It helps prevent abuse and keeps the service free and fast
+                                This is by design. It helps prevent abuse and keeps the <Link href="/tempmail" className="text-primary hover:opacity-80 transition-opacity">tempmail</Link> service free and fast
                                 for all users.
                             </p>
                         </FAQAccordion>

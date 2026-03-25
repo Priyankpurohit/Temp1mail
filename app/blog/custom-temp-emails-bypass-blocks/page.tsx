@@ -48,7 +48,7 @@ export default function BlogPost4() {
                         <p>
                             Public <Link href="/temporary-email" className="text-primary hover:opacity-80 transition-opacity">temporary email</Link> domains like <code className="text-xs bg-muted px-1.5 py-0.5 rounded">tempmail.com</code> or{" "}
                             <code className="text-xs bg-muted px-1.5 py-0.5 rounded">guerrillamail.com</code> are on nearly every website&apos;s
-                            blacklist. The moment you try to sign up with one to protect your <Link href="/primary-email" className="text-primary hover:opacity-80 transition-opacity">primary email</Link>, you get blocked. Custom disposable emails solve this problem completely.
+                            blacklist. The moment you try to sign up with one to protect your primary email, you get blocked. Custom disposable emails solve this problem completely.
                         </p>
 
                         <h2 className="text-xl font-semibold text-foreground pt-2">

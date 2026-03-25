@@ -12,7 +12,7 @@ const newHeaders = {
     'random-mail': { h: 'Free Random Email', s: 'Unpredictable • Hidden • Disposable' },
     'temp-email': { h: 'Free Temp Email', s: 'Temporary • Clean • Private' },
     'temp-mail-free': { h: 'Free Temp Mail', s: 'Free • Temporary • Secure' },
-    'tempEmail': { h: 'Free TempEmail Inbox', s: 'Instant • Programmatic • Clean' },
+    'tempemail': { h: 'Free TempEmail Inbox', s: 'Instant • Programmatic • Clean' },
     'temporary-email': { h: 'Free Temporary Email', s: 'Instant • Disposable • Private' },
     'temporary-mail': { h: 'Free Temporary Mail', s: 'Fast • Temporary • Secure' },
     'throwaway-email': { h: 'Free Throwaway Email', s: 'Disposable • Untracked • Clean' },

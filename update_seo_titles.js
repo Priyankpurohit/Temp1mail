@@ -12,7 +12,7 @@ const seoTitles = {
     'random-mail': 'Free Random Email - Instant Unpredictable Inbox (No Setup)',
     'temp-email': 'Free Temp Email - Clean Spam-Free Inbox (No Logs)',
     'temp-mail-free': 'Free Temp Mail - Instant Secure Inbox (Zero Cost)',
-    'tempEmail': 'Free TempEmail Generator - Clean Programmatic Inbox (No Distractions)',
+    'tempemail': 'Free TempEmail Generator - Clean Programmatic Inbox (No Distractions)',
     'temporary-email': 'Free Temporary Email - Instant Disposable Inbox (No Signup)',
     'temporary-mail': 'Free Temporary Mail - Fast Ephemeral Inbox (No Registration)',
     'throwaway-email': 'Free Throwaway Email - Instant Trashable Inbox (No Tracking)',

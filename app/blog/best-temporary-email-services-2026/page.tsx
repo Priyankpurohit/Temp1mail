@@ -48,7 +48,7 @@ export default function BlogPost1() {
                         <p>
                             In 2026, <Link href="/temporary-email" className="text-primary hover:opacity-80 transition-opacity">temporary email</Link> services are no longer optional. They are essential. With rising AI-powered phishing threats,
                             aggressive data harvesting, and an average data breach cost of <strong className="text-foreground">$4.44 million</strong>,
-                            protecting your <Link href="/primary-email" className="text-primary hover:opacity-80 transition-opacity">primary email</Link> inbox matters more than ever. We tested 20+ <Link href="/disposable-mail" className="text-primary hover:opacity-80 transition-opacity">disposable email</Link> providers on speed, privacy, retention,
+                            protecting your primary email inbox matters more than ever. We tested 20+ <Link href="/disposable-mail" className="text-primary hover:opacity-80 transition-opacity">disposable email</Link> providers on speed, privacy, retention,
                             and features (such as <Link href="/throwaway-email" className="text-primary hover:opacity-80 transition-opacity">throwaway email</Link> delivery). Here is what we found.
                         </p>
 

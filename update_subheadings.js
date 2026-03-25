@@ -14,7 +14,7 @@ const pageSubheadings = {
     'random-mail': 'Random • Instant • Free',             // 23 chars
     'temp-email': 'Temp • Disposable • Fast',             // 24 chars
     'temp-mail-free': 'Free • Temp • Instant',            // 21 chars
-    'tempEmail': 'Temp • Fast • Secure',                  // 20 chars
+    'tempemail': 'Temp • Fast • Secure',                  // 20 chars
     'temporary-email': 'Temporary • Fast • Secure',       // 25 chars
     'temporary-mail': 'Temporary • Quick • Private',       // 27 chars
     'throwaway-email': 'Throwaway • Fast • Secure',

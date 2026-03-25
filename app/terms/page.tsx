@@ -96,7 +96,7 @@ export default function TermsPage() {
                             <h2 className="mb-2 text-lg font-semibold text-foreground">6. Privacy</h2>
                             <p>
                                 We do not require registration or collect personal information. <Link href="/temporary-mail" className="text-primary hover:underline">Temporary mail</Link> or <Link href="/burner-email" className="text-primary hover:underline">burner email</Link>
-                                mailboxes and their contents are automatically deleted after expiration to protect your <Link href="/primary-email" className="text-primary hover:underline">primary email</Link> identity.
+                                mailboxes and their contents are automatically deleted after expiration to protect your primary email identity.
                                 For more details, see our{" "}
                                 <Link href="/privacy" className="text-primary hover:opacity-80 transition-opacity">
                                     Privacy Policy

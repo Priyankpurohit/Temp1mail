@@ -25,7 +25,7 @@ export default function TemporaryEmailPage() {
                 },
                 { 
                     question: "How do I check my messages?", 
-                    answer: <>They appear automatically on your screen. You can also view them via our <Link href="/tempEmail" className="text-primary hover:underline">temp email</Link> variant page.</>, 
+                    answer: <>They appear automatically on your screen. You can also view them via our <Link href="/tempemail" className="text-primary hover:underline">temp email</Link> variant page.</>, 
                     schemaAnswer: "They appear automatically on your screen. You can also view them via our temp email variant page." 
                 },
                 { 
