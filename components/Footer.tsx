@@ -8,12 +8,6 @@ const footerLinks = [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Disclaimer", href: "/disclaimer" },
     { label: "Contact", href: "/contact" },
-    { label: "Disposable Inbox", href: "/disposable-inbox" },
-    { label: "Email For OTP", href: "/email-for-otp" },
-    { label: "Verification Email", href: "/email-for-verification" },
-    { label: "Email Generator", href: "/email-generator" },
-    { label: "Tempmail", href: "/tempmail" },
-    { label: "Temporary Inbox", href: "/temporary-inbox" },
 ];
 
 export function Footer() {

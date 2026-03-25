@@ -82,8 +82,8 @@ export default function BlogPage() {
                 <h1 className="mb-2 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
                     Blog
                 </h1>
-                <p className="mb-10 text-muted-foreground">
-                    Expert guides on disposable email, online privacy, and staying safe in 2026.
+                <p className="mb-10 text-muted-foreground leading-relaxed">
+                    Expert guides on your <Link href="/disposable-inbox" className="text-primary hover:underline">disposable inbox</Link>, online privacy, and staying safe in 2026. Learn more about receiving a <Link href="/email-for-verification" className="text-primary hover:underline">verification email</Link>, generating an <Link href="/email-for-otp" className="text-primary hover:underline">email for OTP</Link>, or getting a quick <Link href="/email-generator" className="text-primary hover:underline">email generator</Link> to secure your <Link href="/temporary-inbox" className="text-primary hover:underline">temporary inbox</Link> with <Link href="/tempmail" className="text-primary hover:underline">tempmail</Link>.
                 </p>
 
                 <div className="space-y-6">

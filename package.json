@@ -41,10 +41,10 @@
     "typescript": "^5"
   },
   "browserslist": [
-    "last 2 chrome versions",
-    "last 2 firefox versions",
-    "last 2 safari versions",
-    "last 2 edge versions",
-    "not dead"
+    "Chrome >= 95",
+    "Safari >= 15.4",
+    "iOS >= 15.4",
+    "Firefox >= 90",
+    "Edge >= 95"
   ]
 }

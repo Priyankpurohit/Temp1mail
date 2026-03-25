@@ -73,8 +73,8 @@ export default function ContactPage() {
                 <h1 className="mb-2 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
                     Contact Us
                 </h1>
-                <p className="mb-10 text-muted-foreground">
-                    Have a question, suggestion, or found a bug? Drop us a message.
+                <p className="mb-10 text-muted-foreground leading-relaxed">
+                    Have a question about your <Link href="/disposable-inbox" className="text-primary hover:underline">disposable inbox</Link>, need help generating an <Link href="/email-for-otp" className="text-primary hover:underline">email for OTP</Link>, or found a bug in our <Link href="/email-generator" className="text-primary hover:underline">email generator</Link>? Drop us a message to get support with your <Link href="/temporary-inbox" className="text-primary hover:underline">temporary inbox</Link>, <Link href="/tempmail" className="text-primary hover:underline">tempmail</Link>, or receiving a <Link href="/email-for-verification" className="text-primary hover:underline">verification email</Link>.
                 </p>
 
                 {submitted ? (

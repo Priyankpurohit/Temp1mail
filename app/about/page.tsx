@@ -67,7 +67,7 @@ export default function AboutPage() {
                         <p>
                             Whether you're testing a new service, signing up for a one-time
                             offer, or simply want to avoid giving out your real email,
-                            Temp1Mail offers a quick and secure <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link> solution.
+                            Temp1Mail offers a quick and secure <Link href="/fake-mail" className="text-primary hover:underline">fake mail</Link> solution. You can use it as a <Link href="/disposable-inbox" className="text-primary hover:underline">disposable inbox</Link> or to get an <Link href="/email-for-otp" className="text-primary hover:underline">email for OTP</Link> verification. It's the perfect <Link href="/email-generator" className="text-primary hover:underline">email generator</Link> for receiving a quick <Link href="/email-for-verification" className="text-primary hover:underline">verification email</Link>.
                         </p>
                     </div>
 
@@ -87,10 +87,7 @@ export default function AboutPage() {
                             with unknown attachments).
                         </p>
                         <p>
-                            Each <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link> address has a limited lifespan, typically a
-                            few hours, after which it and all associated emails are
-                            permanently deleted from our servers. This ensures your privacy
-                            and keeps our system efficient.
+                            Each <Link href="/temporary-email" className="text-primary hover:underline">temporary email</Link> address (or <Link href="/tempmail" className="text-primary hover:underline">tempmail</Link>) acts as a secure <Link href="/temporary-inbox" className="text-primary hover:underline">temporary inbox</Link> with a limited lifespan, typically a few hours, after which it and all associated emails are permanently deleted from our servers. This ensures your privacy and keeps our system efficient.
                         </p>
                     </div>
 

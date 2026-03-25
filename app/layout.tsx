@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import Script from "next/script";
+import { DeferredScripts } from "@/components/DeferredScripts";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -162,25 +163,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Providers>{children}</Providers>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-2R46QD65F3"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-2R46QD65F3');
-          `}
-        </Script>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5486930886029492"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
-
+        <DeferredScripts />
       </body>
     </html>
   );
